@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-background: hsl(0, 0%, 96%);
+  --color-title: hsl(181, 75%, 32%);
+  --color-text: hsla(0, 0%, 0%, 0.8);
+
+  --mix: hsl(0, 0%, 100%);
+  --contrast: color-mix(in lab, currentColor 20%, var(--mix));
+  --border-color: color-mix(in lab, currentColor 20%, hsla(0, 0%, 0%, 0.314));
+
+  @media (prefers-color-scheme: dark) {
+    --color-background: hsl(0, 0%, 10%);
+    --color-title: hsl(179, 59%, 50%);
+    --color-text: hsla(0, 0%, 100%, 0.8);
+
+    --mix: hsl(0, 0%, 0%);
+    --border-color: color-mix(in lab, currentColor 20%, hsla(0, 0%, 100%, 0.314));
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  display: grid;
+  grid-template-columns: [full-width-start] 20px [breakout-start] 1fr [content-start] 860px [content-end] 1fr [breakout-end] 20px [full-width-end];
+
+  @media (max-width: 768px) {
+    grid-template-columns: [full-width-start] 10px [breakout-start] 10px [content-start] 1fr [content-end] 10px [breakout-end] 10px [full-width-end];
+  }
+}
+
+img {
+  font-style: italic;
+
+  max-width: 100%;
+  vertical-align: middle;
+  height: auto;
+}
+
+[data-type='card'] {
+  color: var(--color-title);
+  background-color: var(--contrast);
+  border: 2px solid var(--border-color);
+}
