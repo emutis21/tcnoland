@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "type": "phone",
+    "brand": "OnePlus",
+    "model": "OnePlus 12",
+    "processor": "Qualcomm Snapdragon 8 Gen3",
+    "screen": "6.82\", AMOLED, WQHD+",
+    "image": "https://cdn-files.kimovil.com/default/0009/55/thumb_854860_default_big.jpg",
+    "price": 280
+  },
+  {
+    "id": "2",
+    "type": "phone",
+    "brand": "Oppo",
+    "model": "Oppo Find X7",
+    "processor": "MediaTek Dimensity 9300",
+    "screen": "6.78\", AMOLED, FHD",
+    "image": "https://cdn-files.kimovil.com/default/0009/66/thumb_865520_default_big.jpg",
+    "price": 570
+  },
+  {
+    "id": "3",
+    "type": "phone",
+    "brand": "Nubia",
+    "model": "Nubia Z60 Ultra",
+    "processor": "Qualcomm Snapdragon 8 Gen3",
+    "screen": "6.8\", AMOLED, FHD+",
+    "image": "https://cdn-files.kimovil.com/default/0009/62/thumb_861036_default_big.jpg",
+    "price": 400
+  },
+  {
+    "id": "4",
+    "type": "phone",
+    "brand": "Xiaomi",
+    "model": "Xiaomi 12",
+    "processor": "Qualcomm Snapdragon 8 Gen3",
+    "screen": "6.28\", AMOLED, FHD+",
+    "image": "https://cdn-files.kimovil.com/default/0009/63/thumb_862036_default_big.jpg",
+    "price": 350
+  },
+  {
+    "id": "5",
+    "type": "phone",
+    "brand": "Samsung",
+    "model": "Samsung Galaxy S22",
+    "processor": "Exynos 2200",
+    "screen": "6.1\", AMOLED, FHD+",
+    "image": "https://cdn-files.kimovil.com/default/0009/64/thumb_863036_default_big.jpg",
+    "price": 600
+  },
+  {
+    "id": "6",
+    "type": "phone",
+    "brand": "Realme",
+    "model": "Realme GT 2 Pro",
+    "processor": "Qualcomm Snapdragon 8 Gen3",
+    "screen": "6.7\", AMOLED, FHD+",
+    "image": "https://cdn-files.kimovil.com/default/0009/65/thumb_864036_default_big.jpg",
+    "price": 450
+  },
+  {
+    "id": "7",
+    "type": "phone",
+    "brand": "Motorola",
+    "model": "Motorola Moto G200",
+    "processor": "Qualcomm Snapdragon 888",
+    "screen": "6.8\", LCD, FHD+",
+    "image": "https://cdn-files.kimovil.com/default/0009/67/thumb_867520_default_big.jpg",
+    "price": 300
+  },
+  {
+    "id": "8",
+    "type": "phone",
+    "brand": "LG",
+    "model": "LG Velvet 2 Pro",
+    "processor": "Qualcomm Snapdragon 888",
+    "screen": "6.8\", AMOLED, FHD+",
+    "image": "https://cdn-files.kimovil.com/default/0009/68/thumb_868520_default_big.jpg",
+    "price": 250
+  }
+]
