@@ -20,10 +20,7 @@ function Details({
           <div className='flex w-full flex-col gap-1'>
             <div className='flex items-start justify-between gap-4'>
               <div className='flex flex-col'>
-                <p className='text-lg font-medium'>{item.title}</p>
-                {Boolean(item.options) && (
-                  <p className='text-muted-foreground'>{getCartItemOptionsSummary(item.options)}</p>
-                )}
+                <p className='text-lg font-medium'>{item.brand}</p>
               </div>
               <p className='font-medium leading-[1.9rem]'>
                 {parseCurrency(getCartItemPrice(item))}
