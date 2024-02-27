@@ -1,6 +1,7 @@
 import { Navbar } from '@/components/ui/Navbar/Navbar'
 import api from '../modules/product/api'
 import { Button } from '@/components/ui/button'
+import StoreScreen from '@/modules/store/screens/Store'
 
 export default async function Home() {
   const products = await api.list()
@@ -12,36 +13,12 @@ export default async function Home() {
     <>
       <Navbar />
 
-      <Button variant='primary' size='md'>
+      {/* <Button variant='primary' size='md'>
         Cómpralo
-      </Button>
-      <main
-        className='flex flex-col items-center justify-between [grid-column:full-width]'
-      >
-        <ul className='grid grid-cols-1 gap-24 sm:grid-cols-2 lg:grid-cols-3'>
-          {products.map(({ id, brand, model, processor, screen, image, price }) => {
-            return (
-              <li
-                key={id}
-                className='flex flex-col items-center justify-between rounded-lg px-4 py-2'
-                data-type='card'
-              >
-                <h2>
-                  {brand} {model}
-                </h2>
-                <p>{processor}</p>
-                <p>{screen}</p>
-                <img
-                  src={image}
-                  alt={brand}
-                  className='aspect-[14/16] w-64 rounded-lg object-cover'
-                />
-                <p>{price}</p>
-              </li>
-            )
-          })}
-        </ul>
-      </main>
+      </Button> */}
+      <h1 className='mb-8 text-center text-4xl font-semibold'>Store</h1>
+
+      <StoreScreen products={products} />
     </>
   )
 }
