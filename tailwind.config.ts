@@ -2,14 +2,16 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}'
   ],
+  prefix: '',
   theme: {
     extend: {
       colors: {
-        'breakerbay': {
+        breakerbay: {
           '50': '#f1fcfb',
           '100': '#cef9f5',
           '200': '#9ef1eb',
@@ -20,11 +22,11 @@ const config: Config = {
           '700': '#146e71',
           '800': '#15575a',
           '900': '#16494b',
-          '950': '#06292d',
-        },
-      },
-    },
+          '950': '#06292d'
+        }
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 }
 export default config
