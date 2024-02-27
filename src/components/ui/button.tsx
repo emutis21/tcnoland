@@ -8,9 +8,9 @@ const buttonVariants = {
 } as const
 
 const buttonSizes = {
-  sm: 'text-sm min-w-20 max-w-max [&>span]:px-4 [&>span]:py-2',
-  md: 'text-lg min-w-28 max-w-max [&>span]:px-5 [&>span]:py-3',
-  lg: 'text-xl min-w-full [&>span]:px-6 [&>span]:py-4'
+  sm: 'text-sm min-w-20 max-w-max [&>span]:px-3 [&>span]:py-1',
+  md: 'text-lg min-w-28 max-w-max [&>span]:px-5 [&>span]:py-2',
+  lg: 'text-xl min-w-full [&>span]:w-full [&>span]:py-4'
 } as const
 
 type ButtonSizes = keyof typeof buttonSizes
@@ -27,8 +27,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const variantClass = variant ? buttonVariants[variant] : ''
     const defSize = size ? buttonSizes[size] : 'text-base'
     return (
-      <button ref={ref} className={`${variantClass} ${defSize}`} {...props}>
-        <span className=''>{children}</span>
+      <button
+        ref={ref}
+        className={`${className} grid h-fit cursor-pointer touch-manipulation whitespace-nowrap rounded-lg border-0 p-1 text-white transition-all duration-300 hover:outline-0 active:scale-90 active:outline-0 [&>span]:hover:bg-transparent ${variantClass} ${defSize}`}
+        {...props}
+      >
+        <span className='h-full w-full rounded-md duration-200'>{children}</span>
       </button>
     )
   }
