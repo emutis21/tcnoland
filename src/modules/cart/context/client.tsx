@@ -125,6 +125,8 @@ function CartProviderClient({
           </div>
         )}
         {/* Cart Drawer */}
+        {/* TODO: fix this, cartdrawer */}
+
         {Boolean(isCartOpen) && (
           <CartDrawer
             fields={fields}

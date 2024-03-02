@@ -10,7 +10,7 @@ const buttonVariants = {
 const buttonSizes = {
   sm: 'text-sm min-w-20 max-w-max [&>span]:px-3 [&>span]:py-1',
   md: 'text-lg min-w-28 max-w-max [&>span]:px-5 [&>span]:py-2',
-  lg: 'text-xl min-w-full [&>span]:w-full [&>span]:py-4'
+  lg: 'text-xl min-w-full [&>span]:w-full [&>span]:py-4 [&>span]:px-6'
 } as const
 
 type ButtonSizes = keyof typeof buttonSizes

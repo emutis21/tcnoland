@@ -16,7 +16,7 @@ export const FlyoutLink: React.FC<FlyoutLinkProps> = ({ children, href, FlyoutCo
     <div
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
-      className='group relative h-fit w-fit hover:text-breakerbay-200'
+      className='group relative h-fit w-fit text-breakerbay-800 hover:text-breakerbay-500 dark:text-breakerbay-50 dark:hover:text-breakerbay-200'
     >
       <a href={href} className='relative transition-colors'>
         {children}
@@ -37,8 +37,8 @@ export const FlyoutLink: React.FC<FlyoutLinkProps> = ({ children, href, FlyoutCo
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 15 }}
             style={{ x: '-50%' }}
-            transition={{ duration: 0.2, esae: 'easeOut' }}
-            className='absolute left-1/2 top-12 w-max rounded-lg bg-slate-50 p-6 shadow-xl dark:bg-slate-950'
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className='absolute left-1/2 top-12 w-max rounded-lg bg-slate-50 p-6 text-breakerbay-900 shadow-xl dark:bg-slate-950 dark:text-breakerbay-200'
           >
             <div className='absolute -top-6 left-0 right-0 h-6 bg-transparent' />
             <div

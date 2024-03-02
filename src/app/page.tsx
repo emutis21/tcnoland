@@ -16,7 +16,7 @@ export default async function Home() {
       {/* <Button variant='primary' size='md'>
         Cómpralo
       </Button> */}
-      <h1 className='mb-8 text-center text-4xl font-semibold'>Store</h1>
+      <h1 className='mb-8 text-center text-4xl font-semibold [grid-column:content]'>Store</h1>
 
       <StoreScreen products={products} />
     </>

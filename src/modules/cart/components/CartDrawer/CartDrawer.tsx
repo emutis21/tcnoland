@@ -115,6 +115,8 @@ function CartDrawer({
           </SheetFooter>
         </SheetContent>
       </Sheet> */}
+
+      {/* TODO: fix this, when i go to buy something */}
       <main className='flex flex-col items-center justify-between [grid-column:full-width]'>
         <ul className='grid grid-cols-1 gap-24 sm:grid-cols-2 lg:grid-cols-3'>
           {Array.from(cart.entries()).map(([id, item]) => {

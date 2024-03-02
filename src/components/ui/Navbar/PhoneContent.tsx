@@ -9,11 +9,11 @@ export const PhoneContent = () => {
 
   const brands = useMemo(() => Array.from(new Set(products.map(({ brand }) => brand))), [products])
   return (
-    <div className='flex gap-5 text-white'>
+    <div className='flex gap-5 text-breakerbay-800 dark:text-breakerbay-100'>
       <div className='flex h-full flex-col justify-between gap-5'>
         <header className='w-64 bg-transparent font-semibold'>
           <h2 className='mb-5 text-xl font-semibold'>Celulares</h2>
-          <h3>
+          <h3 className='text-breakerbay-50'>
             <a
               href='#'
               className='flex h-full justify-between rounded-lg bg-gradient-to-br from-breakerbay-800 to-breakerbay-500 p-4
@@ -44,7 +44,7 @@ export const PhoneContent = () => {
         >
           Marcas
         </h2>
-        <ul className='group w-full space-y-4 px-4 [&>li>a]:block [&>li>a]:border-b [&>li>a]:border-b-breakerbay-700 [&>li>a]:py-[2px] hover:[&>li>a]:border-b-breakerbay-500'>
+        <ul className='group w-full space-y-4 px-4 text-breakerbay-50 [&>li>a]:block [&>li>a]:border-b [&>li>a]:border-b-breakerbay-700 [&>li>a]:py-[2px] hover:[&>li>a]:border-b-breakerbay-500'>
           {brands.map((brand) => (
             <li key={brand}>
               <a href='#' className='flex justify-between'>
