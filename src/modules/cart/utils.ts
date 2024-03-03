@@ -2,7 +2,7 @@ import type { Cart, CartItem, Checkout } from './types'
 
 import { parseCurrency } from '~/currency/utils'
 
-// TODO: Revisar bien los tipos y si funicona
+// TODO: Revisar bien los tipos y actualizar la db para que coincida con el tipo de CartItem
 
 export function getCartItemPrice(item: CartItem): number {
   const optionsPrice = item.options
