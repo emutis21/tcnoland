@@ -19,7 +19,7 @@
     --color-title: hsl(179, 59%, 50%);
     --color-title-hover: hsl(179, 59%, 70%);
     --color-text: hsla(0, 0%, 100%, 0.8);
-    --color-nav: #0099ff;
+    --color-nav: hsl(204, 100%, 50%);
     --color: rgba(114, 114, 114, 0.1);
 
     --mix: hsl(0, 0%, 0%);
@@ -109,7 +109,7 @@ img {
   display: grid;
   grid-auto-flow: dense;
   grid-auto-rows: 1fr auto auto;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 264px), 1fr));
 
   container-type: inline-size;
 }
@@ -156,6 +156,17 @@ img {
 
 .product__description {
   display: block;
+}
+
+.product[data-featured='true'] {
+  footer {
+  // TODO: sí el ancho del footer es menor que 
+    @container (min-width: 450px) {
+      button {
+        // display: none;
+      }
+    }
+  }
 }
 
 // .product[data-featured='true'] {
