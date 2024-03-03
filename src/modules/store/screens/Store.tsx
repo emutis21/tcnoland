@@ -65,39 +65,39 @@ function StoreScreen({ products }: { products: Product[] }) {
     })
   }
 
-  console.log('state', state)
-
-  useEffect(() => {
-    if (openModalId) document.body.style.overflow = 'hidden'
-    else document.body.style.overflow = 'auto'
-  }, [openModalId])
-
   return (
     <>
-      <aside
-        className='sticky top-2 mb-2 
-      h-[calc(80vh-16px)]
-      rounded-lg bg-breakerbay-800 p-4 [grid-column:breakout-start]'
-      >
+      <aside className='sticky top-2 mb-2 h-[calc(100vh-16px)] rounded-lg bg-breakerbay-800 p-4 [grid-column:breakout-start]'>
         hola
       </aside>
       <main className='grid h-fit w-full gap-8 pl-6 [grid-column:content-start/breakout-end] [grid-template-columns:_1fr]'>
         <ul className='product__grid gap-x-14 gap-y-12 lg:gap-x-12'>
           {products.map((product) => (
-            <>
+            <li
+              key={product.id}
+              className='product cursor-pointer'
+              data-testid='product'
+              data-featured='true'
+              onClick={() => {
+                if (setOpenModalId) setOpenModalId(product.id)
+              }}
+            >
               <ProductCard
-                key={product.id}
                 product={product}
                 onAdd={(item: Product) => {
                   addItem(Date.now(), { ...item, quantity: 1 })
                 }}
                 setOpenModalId={setOpenModalId}
               />
-            </>
+            </li>
           ))}
         </ul>
 
-        <SideCart openModalId={openModalId} onClose={() => setOpenModalId(null)}>
+        <SideCart
+          openModalId={openModalId}
+          onClose={() => setOpenModalId(null)}
+          title='Agregar al carrito'
+        >
           <CartItemDrawer
             item={{ ...products.find((product) => product.id === openModalId)!, quantity: 1 }}
             onClose={() => {

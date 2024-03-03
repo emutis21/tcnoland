@@ -4,6 +4,8 @@ import type { Store } from '~/store/types'
 
 import type { Cart, CartItem, Checkout, Field } from '../types'
 
+import useLocalStorageCart from '@/hooks/useCart'
+
 import { useState, useMemo, useCallback, useContext, createContext } from 'react'
 
 import { parseCurrency } from '~/currency/utils'
@@ -12,6 +14,7 @@ import { Button } from '@/components/ui/button'
 
 import CartDrawer from '../components/CartDrawer'
 import { getCartMessage, getCartTotal } from '../utils'
+import { SideCart } from '@/components/ui/sideCart'
 
 interface Context {
   state: {
@@ -41,7 +44,7 @@ function CartProviderClient({
   store: Store
 }) {
   const [checkout, setCheckout] = useState<Checkout>(() => new Map())
-  const [cart, setCart] = useState<Cart>(() => new Map())
+  const [cart, setCart] = useLocalStorageCart()
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false)
   const total = useMemo(() => parseCurrency(getCartTotal(cart)), [cart])
   const quantity = useMemo(
@@ -52,27 +55,27 @@ function CartProviderClient({
 
   const addItem = useCallback(
     (id: number, value: CartItem) => {
-      cart.set(id, value)
-
-      setCart(new Map(cart))
+      const newCart = new Map(cart)
+      newCart.set(id, value)
+      setCart(newCart)
     },
     [cart]
   )
 
   const removeItem = useCallback(
     (id: number) => {
-      cart.delete(id)
-
-      setCart(new Map(cart))
+      const newCart = new Map(cart)
+      newCart.delete(id)
+      setCart(newCart)
     },
     [cart]
   )
 
   const updateItem = useCallback(
     (id: number, value: CartItem) => {
-      cart.set(id, value)
-
-      setCart(new Map(cart))
+      const newCart = new Map(cart)
+      newCart.set(id, value)
+      setCart(newCart)
     },
     [cart]
   )
@@ -90,6 +93,7 @@ function CartProviderClient({
     () => ({ checkout, cart, total, quantity, message }),
     [checkout, cart, total, quantity, message]
   )
+  
   const actions = useMemo(
     () => ({ updateItem, updateField, addItem, removeItem }),
     [updateItem, updateField, addItem, removeItem]
@@ -115,7 +119,7 @@ function CartProviderClient({
               <div className='flex items-center gap-4'>
                 <div className='flex items-center gap-2'>
                   <p className='leading-6'>Ver pedido</p>
-                  <p className='rounded-sm bg-black/25 px-2 py-1 text-xs font-semibold text-white/90'>
+                  <p className='rounded-sm bg-black/25 px-2 py-1 text-sm font-semibold text-white/90'>
                     {quantity} item
                   </p>
                 </div>
@@ -124,18 +128,23 @@ function CartProviderClient({
             </Button>
           </div>
         )}
-        {/* Cart Drawer */}
-        {/* TODO: fix this, cartdrawer */}
-
-        {Boolean(isCartOpen) && (
-          <CartDrawer
-            fields={fields}
-            store={store}
-            onClose={() => {
-              setIsCartOpen(false)
-            }}
-          />
-        )}
+        <SideCart
+          openModalId={isCartOpen ? 'cart' : null}
+          onClose={() => {
+            setIsCartOpen(false)
+          }}
+          title='Tu pedido'
+        >
+          {Boolean(isCartOpen) && (
+            <CartDrawer
+              fields={fields}
+              store={store}
+              onClose={() => {
+                setIsCartOpen(false)
+              }}
+            />
+          )}
+        </SideCart>
       </>
     </CartContext.Provider>
   )
