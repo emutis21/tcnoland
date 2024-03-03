@@ -1,10 +1,12 @@
-import type { Cart, CartItem } from '../../types'
+import type { Cart, CartItem } from '~/cart/types'
 
 import { parseCurrency } from '~/currency/utils'
 
 import { Button } from '@/components/ui/button'
 
-import { getCartItemPrice, getCartItemOptionsSummary } from '../../utils'
+import { getCartItemPrice, getCartItemOptionsSummary } from '~/cart/utils'
+import { MinusIcon } from '@/components/icons/minus'
+import { AddIcon } from '@/components/icons/add'
 
 function Details({
   cart,
@@ -14,43 +16,43 @@ function Details({
   onChange: (id: number, item: CartItem) => void
 }) {
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='grid gap-10 divide-y divide-breakerbay-50/60 overflow-y-auto -mr-3 pr-[3px] [scrollbar-color:_#0099ff90_var(--color)] [scrollbar-width:_thin]'>
       {Array.from(cart.entries()).map(([id, item]) => (
-        <div key={id.toString()} className='flex gap-2' data-testid={`cart-item-${item.id}`}>
-          <div className='flex w-full flex-col gap-1'>
-            <div className='flex items-start justify-between gap-4'>
-              <div className='flex flex-col'>
-                <p className='text-lg font-medium'>{item.brand}</p>
-              </div>
-              <p className='font-medium leading-[1.9rem]'>
-                {parseCurrency(getCartItemPrice(item))}
-              </p>
-            </div>
-            <div className='flex gap-2'>
-              <Button
-                className='text-md h-6 w-6 rounded-full p-0.5'
-                data-testid='decrement'
-                variant='primary'
-                onClick={() => {
-                  onChange(id, { ...item, quantity: item.quantity - 1 })
-                }}
-              >
-                {/* <MinusIcon className='h-6 w-6' /> */}
-              </Button>
-              <p className='min-w-[24px] text-center font-medium' data-testid='quantity'>
-                {item.quantity}
-              </p>
-              <Button
-                className='text-md h-6 w-6 rounded-full p-0.5'
-                data-testid='increment'
-                variant='primary'
-                onClick={() => {
-                  onChange(id, { ...item, quantity: item.quantity + 1 })
-                }}
-              >
-                {/* <PlusIcon className='h-6 w-6' /> */}
-              </Button>
-            </div>
+        <div
+          key={id.toString()}
+          className='flex flex-col gap-4 pt-2 text-breakerbay-50'
+          data-testid={`cart-item-${item.id}`}
+        >
+          <div className='flex h-fit items-start justify-between'>
+            <h3 className='text-lg font-medium'>{item.model}</h3>
+
+            <p className='font-medium pr-2'>{parseCurrency(getCartItemPrice(item))}</p>
+          </div>
+
+          <div className='flex items-center gap-2'>
+            <button
+              className='text-md transitions-all h-6 w-6 rounded-full p-0.5 text-center text-sky-500 duration-150 hover:text-sky-300 active:scale-90'
+              data-testid='decrement'
+              aria-label='Decrementar cantidad'
+              onClick={() => {
+                onChange(id, { ...item, quantity: item.quantity - 1 })
+              }}
+            >
+              <MinusIcon size={22} />
+            </button>
+            <p className='min-w-[24px] text-center font-medium' data-testid='quantity'>
+              {item.quantity}
+            </p>
+            <button
+              className='text-md transitions-all h-6 w-6 rounded-full p-0.5 text-center text-sky-500 duration-150 hover:text-sky-300 active:scale-90'
+              data-testid='increment'
+              aria-label='Incrementar cantidad'
+              onClick={() => {
+                onChange(id, { ...item, quantity: item.quantity + 1 })
+              }}
+            >
+              <AddIcon size={22} />
+            </button>
           </div>
         </div>
       ))}

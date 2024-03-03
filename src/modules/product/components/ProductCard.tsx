@@ -22,55 +22,47 @@ function ProductCard({
 }) {
   const cartItem = useMemo<CartItem>(() => ({ ...product, quantity: 1 }), [product])
 
-  const { id, image, model, price, processor } = product
+  const { image, model, price, processor } = product
 
   return (
     <>
-      <li
-        key={product.id}
-        className='product cursor-pointer'
-        data-testid='product'
-        data-featured='true'
-        onClick={() => {
-          if (setOpenModalId) setOpenModalId(product.id)
-        }}
-      >
-        {product.image ? (
-          <figcaption className='overflow-hidden'>
-            <img
-              alt={model}
-              className='aspect-[9/16] h-56 w-full transform object-cover transition-all duration-300 ease-in-out'
-              loading='lazy'
-              src={image}
-            />
-          </figcaption>
-        ) : (
-          <div className='flex h-32 items-center justify-center bg-slate-950'>
-            <p className='text-white'>Aún no tenemos la imagen</p>
-          </div>
-        )}
-        <div className='flex flex-col justify-between'>
-          <h3 className='product__title m-4 line-clamp-3 block text-2xl font-bold'>{model}</h3>
-          <p className='product__description m-4 block text-sm text-breakerbay-800 dark:text-breakerbay-200'>
-            {processor}
-          </p>
+      {product.image ? (
+        <figcaption className='overflow-hidden'>
+          <img
+            alt={model}
+            className='aspect-[9/16] h-56 w-full transform object-cover transition-all duration-300 ease-in-out'
+            loading='lazy'
+            src={image}
+          />
+        </figcaption>
+      ) : (
+        <div className='flex h-32 items-center justify-center bg-slate-950'>
+          <p className='text-white'>Aún no tenemos la imagen</p>
         </div>
-        <footer className='flex items-end justify-between gap-4 px-4 pb-4'>
-          <p className='product__price text-basis font-light text-breakerbay-800 dark:text-breakerbay-200'>
-            Desde <span className='block text-lg font-black'>{parseCurrency(price)}</span>
-          </p>
-          <Button
-            onClick={() => {
-              if (setOpenModalId) setOpenModalId(product.id)
-            }}
-            size='sm'
-            variant='primary'
-            className='product__button'
-          >
-            Add to cart
-          </Button>
-        </footer>
-      </li>
+      )}
+      <div className='flex flex-col justify-between'>
+        <h3 className='product__title m-4 line-clamp-3 block text-2xl font-bold'>{model}</h3>
+        <p className='product__description m-4 block text-sm text-breakerbay-800 dark:text-breakerbay-200'>
+          {processor}
+        </p>
+      </div>
+      <footer className='flex items-end justify-between gap-4 px-4 pb-4'>
+        <p className='product__price text-basis font-light text-breakerbay-800 dark:text-breakerbay-200'>
+          Desde <span className='block text-sm font-black'>{parseCurrency(price)}</span>
+        </p>
+        <Button
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+            e.stopPropagation()
+            e.preventDefault()
+            onAdd(product)
+          }}
+          size='sm'
+          variant='primary'
+          className='product__button'
+        >
+          Add to cart
+        </Button>
+      </footer>
     </>
   )
 }
