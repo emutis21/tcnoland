@@ -1,4 +1,6 @@
+import { Input } from '@/components/ui/input'
 import type { Checkout, Field } from '../../types'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
 // import { Alert } from '@/components/ui/alert'
 // import { Input } from '@/components/ui/input'
@@ -14,9 +16,9 @@ function TextField({
   onChange: (value: string) => void
 }) {
   return (
-    <input
+    <Input
       value={value}
-      onChange={(e) => {
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value)
       }}
       {...props}
@@ -24,31 +26,34 @@ function TextField({
   )
 }
 
-function RadioField({
-  value,
-  onChange,
-  options
-}: {
+type RadioFieldProps = {
   options: string[]
   onChange: (value: string) => void
   value: string
-}) {
+}
+
+function RadioField({ value, onChange, options }: RadioFieldProps) {
+  const radioOptions = options.map((option) => ({ label: option, value: option }))
+
   return (
-    <div>
-      {/* <RadioGroup value={value} onValueChange={onChange}>
-        <div className='flex flex-col gap-4'>
-          {options.map((option) => (
-            <div key={option} className='flex items-center gap-x-3'>
-              <RadioGroupItem id={option} value={option}>
-                {option}
-              </RadioGroupItem>
-              <Label htmlFor={option}>{option}</Label>
-            </div>
-          ))}
-        </div>
-      </RadioGroup> */}
-      Radiooo
-    </div>
+    <RadioGroup
+      className=''
+      name='radiofield'
+      value={value}
+      onChange={onChange}
+      options={radioOptions}
+    >
+      {options.map((option, index) => (
+        <RadioGroupItem
+          key={index}
+          name='radiofield'
+          value={option}
+          checked={value === option}
+          onChange={onChange}
+          label={option}
+        />
+      ))}
+    </RadioGroup>
   )
 }
 
@@ -62,18 +67,18 @@ function Fields({
   onChange: (id: string, value: string) => void
 }) {
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-1 flex-col gap-8'>
       {fields.map((field) => (
         <div key={field.title} className='flex flex-col gap-4'>
           <p className='text-lg font-medium'>{field.title}</p>
           <div className='flex flex-col gap-4'>
             {field.type === 'text' && (
-              <input
+              <Input
                 placeholder={field.placeholder}
                 value={checkout.get(field.title) || ''}
-                // onChange={(value: string) => {
-                //   onChange(field.title, value)
-                // }}
+                onChange={(e) => {
+                  onChange(field.title, e.target.value)
+                }}
               />
             )}
             {field.type === 'radio' && (
@@ -85,7 +90,7 @@ function Fields({
                 }}
               />
             )}
-            {/* {field.note ? <Alert>{field.note}</Alert> : null} */}
+            {field.note && <p className='text-sm text-gray-500'>{field.note}</p>}
           </div>
         </div>
       ))}

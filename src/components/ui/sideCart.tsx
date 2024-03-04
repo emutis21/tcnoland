@@ -49,9 +49,9 @@ export const SideCart = ({
           <motion.aside
             key={openModalId}
             layout
-            className='grid h-full w-[450px] gap-12 self-end overflow-y-auto border-l-4 border-l-breakerbay-500 bg-breakerbay-500 p-8 text-breakerbay-50 dark:bg-slate-950'
+            className='flex flex-col justify-between h-full w-[450px] gap-12 self-end overflow-y-auto border-l-4 border-l-breakerbay-500 bg-breakerbay-500 p-8 text-breakerbay-50 dark:bg-slate-950'
           >
-            <header className='flex items-start justify-between'>
+            <header className='flex items-start justify-between flex-grow-0'>
               <h2 className='text-3xl font-semibold'>{title}</h2>
               <button
                 onClick={() => {

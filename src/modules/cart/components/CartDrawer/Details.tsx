@@ -1,10 +1,7 @@
 import type { Cart, CartItem } from '~/cart/types'
-
 import { parseCurrency } from '~/currency/utils'
+import { getCartItemPrice } from '~/cart/utils'
 
-import { Button } from '@/components/ui/button'
-
-import { getCartItemPrice, getCartItemOptionsSummary } from '~/cart/utils'
 import { MinusIcon } from '@/components/icons/minus'
 import { AddIcon } from '@/components/icons/add'
 
@@ -16,7 +13,7 @@ function Details({
   onChange: (id: number, item: CartItem) => void
 }) {
   return (
-    <div className='grid gap-10 divide-y divide-breakerbay-50/60 overflow-y-auto -mr-3 pr-[3px] [scrollbar-color:_#0099ff90_var(--color)] [scrollbar-width:_thin]'>
+    <div className='flex flex-col flex-1 gap-10 divide-y divide-breakerbay-50/60 overflow-y-auto -mr-3 pr-[3px] [scrollbar-color:_#0099ff90_var(--color)] [scrollbar-width:_thin]'>
       {Array.from(cart.entries()).map(([id, item]) => (
         <div
           key={id.toString()}
