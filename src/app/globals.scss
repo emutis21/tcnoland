@@ -158,17 +158,6 @@ img {
   display: block;
 }
 
-.product[data-featured='true'] {
-  footer {
-  // TODO: sí el ancho del footer es menor que 
-    @container (min-width: 450px) {
-      button {
-        // display: none;
-      }
-    }
-  }
-}
-
 // .product[data-featured='true'] {
 //   @container (min-width: 850px) {
 //     grid-column: span 2;
