@@ -1,11 +1,7 @@
 import { Input } from '@/components/ui/input'
 import type { Checkout, Field } from '../../types'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-
-// import { Alert } from '@/components/ui/alert'
-// import { Input } from '@/components/ui/input'
-// import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-// import { Label } from '@/components/ui/label'
+import { RadioField } from '@/components/ui/radioGruop'
 
 function TextField({
   value,
@@ -23,37 +19,6 @@ function TextField({
       }}
       {...props}
     />
-  )
-}
-
-type RadioFieldProps = {
-  options: string[]
-  onChange: (value: string) => void
-  value: string
-}
-
-function RadioField({ value, onChange, options }: RadioFieldProps) {
-  const radioOptions = options.map((option) => ({ label: option, value: option }))
-
-  return (
-    <RadioGroup
-      className=''
-      name='radiofield'
-      value={value}
-      onChange={onChange}
-      options={radioOptions}
-    >
-      {options.map((option, index) => (
-        <RadioGroupItem
-          key={index}
-          name='radiofield'
-          value={option}
-          checked={value === option}
-          onChange={onChange}
-          label={option}
-        />
-      ))}
-    </RadioGroup>
   )
 }
 

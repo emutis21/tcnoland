@@ -13,17 +13,23 @@ import { parseCurrency } from '@/modules/currency/utils'
 import ProductCard from '@/modules/product/components/ProductCard'
 import { AnimatePresence, motion } from 'framer-motion'
 import { SideCart } from '@/components/ui/sideCart'
+import { SearchIcon } from '@/components/icons/search'
+import { Input } from '@/components/ui/input'
+import { AsideComponent } from '@/components/ui/aside'
 
-function StoreScreen({ products }: { products: Product[] }) {
+function StoreScreen({
+  query,
+  brand,
+  products
+}: {
+  query?: string
+  brand?: string
+  products: Product[]
+}) {
   const [state, { addItem }] = useCart()
   const [openModalId, setOpenModalId] = useState<string | null>(null)
 
-  const [query, setQuery] = useState<string>('')
-  const [layout, setLayout] = useState<'list' | 'grid'>(() =>
-    products.length > 30 ? 'list' : 'grid'
-  )
-  console.log('state', state)
-  const [selectedCategory, setSelectedCategory] = useState<Product['model'] | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<Product['brand'] | null>(null)
   const categories = useMemo<[Product['screen'], Product[]][]>(() => {
     let draft = products
 
@@ -45,53 +51,74 @@ function StoreScreen({ products }: { products: Product[] }) {
     return Array.from(groups.entries())
   }, [query, products])
 
-  function handleSelectCategory(category: Product['model']) {
+  function handleSelectCategory(category: Product['brand']) {
     setSelectedCategory((currentSelectedCategory) =>
       currentSelectedCategory === category ? null : category
     )
 
-    queueMicrotask(() => {
-      const categoryElement = document.getElementById(category)!
-      const filtersElement = document.getElementById('filters')!
-      const offset = filtersElement.getBoundingClientRect().height
-      const bodyRect = document.body.getBoundingClientRect().top
-      const elementRect = categoryElement.getBoundingClientRect().top
-      const elementPosition = elementRect - bodyRect
-      const offsetPosition = elementPosition - offset
+    // queueMicrotask(() => {
+    //   const categoryElement = document.getElementById(category)!
+    //   const filtersElement = document.getElementById('filters')!
+    //   const offset = filtersElement.getBoundingClientRect().height
+    //   const bodyRect = document.body.getBoundingClientRect().top
+    //   const elementRect = categoryElement.getBoundingClientRect().top
+    //   const elementPosition = elementRect - bodyRect
+    //   const offsetPosition = elementPosition - offset
 
-      window.scrollTo({
-        top: offsetPosition
-      })
-    })
+    //   window.scrollTo({
+    //     top: offsetPosition
+    //   })
+    // })
   }
+
+  const filteredProducts = useMemo(() => {
+    let result = products
+
+    if (query) {
+      result = result.filter(({ model }) =>
+        [model].some((field) => field.toLowerCase().includes(query.toLowerCase()))
+      )
+    }
+
+    if (brand) {
+      if (Array.isArray(brand)) {
+        result = result.filter((product) => brand.includes(product.brand))
+      } else {
+        result = result.filter((product) => product.brand === brand)
+      }
+    }
+    return result
+  }, [products, query])
 
   return (
     <>
-      <aside className='sticky top-2 mb-2 h-[calc(100vh-16px)] rounded-lg bg-breakerbay-800 p-4 [grid-column:breakout-start]'>
-        hola
-      </aside>
-      <main className='grid h-fit w-full gap-8 pl-6 [grid-column:content-start/breakout-end] [grid-template-columns:_1fr]'>
-        <ul className='product__grid gap-x-14 gap-y-12 lg:gap-x-12'>
-          {products.map((product) => (
-            <li
-              key={product.id}
-              className='product cursor-pointer'
-              data-testid='product'
-              data-featured='true'
-              onClick={() => {
-                if (setOpenModalId) setOpenModalId(product.id)
-              }}
-            >
-              <ProductCard
-                product={product}
-                onAdd={(item: Product) => {
-                  addItem(Date.now(), { ...item, quantity: 1 })
+      <main className='grid h-fit w-full gap-8 [grid-template-columns:_1fr]'>
+        {filteredProducts.length !== 0 ? (
+          <ul className='product__grid gap-x-14 gap-y-12 lg:gap-x-12'>
+            {filteredProducts.map((product) => (
+              <li
+                key={product.id}
+                className='product max-w-[380px] cursor-pointer'
+                data-featured='true'
+                onClick={() => {
+                  if (setOpenModalId) setOpenModalId(product.id)
                 }}
-                setOpenModalId={setOpenModalId}
-              />
-            </li>
-          ))}
-        </ul>
+              >
+                <ProductCard
+                  product={product}
+                  onAdd={(item: Product) => {
+                    addItem(Date.now(), { ...item, quantity: 1 })
+                  }}
+                  setOpenModalId={setOpenModalId}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className='flex bg-violelt-800 py-4 h-screen items-start justify-start'>
+            <p className='text-2xl font-semibold'>No se encontraron productos</p>
+          </div>
+        )}
 
         <SideCart
           openModalId={openModalId}

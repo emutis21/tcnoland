@@ -41,7 +41,7 @@ function ProductCard({
         </div>
       )}
       <div className='flex flex-col justify-between'>
-        <h3 className='product__title m-4 line-clamp-3 block text-2xl font-bold'>{model}</h3>
+        <h2 className='product__title m-4 line-clamp-3 block text-2xl font-bold'>{model}</h2>
         <p className='product__description m-4 block text-sm text-breakerbay-800 dark:text-breakerbay-200'>
           {processor}
         </p>

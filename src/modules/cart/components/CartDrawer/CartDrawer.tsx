@@ -62,7 +62,6 @@ function CartDrawer({
             </div>
             <Button
               className='w-full'
-              data-testid='continue-order'
               size='lg'
               variant='primary'
               onClick={() => {
@@ -73,8 +72,6 @@ function CartDrawer({
             </Button>
           </>
         ) : null}
-
-        {/* // TODO:arreglar el componen fields */}
 
         {(currentStep === 'fields' || !fields) && (
           <div className='flex w-full flex-col gap-4'>
@@ -94,7 +91,7 @@ function CartDrawer({
               rel='noopener noreferrer'
               target='_blank'
             >
-              <Button className='w-full' data-testid='complete-order' size='lg' variant='primary'>
+              <Button className='w-full' size='lg' variant='primary'>
                 <div className='inline-flex items-center gap-2'>
                   <WhatsappIcon />
                   <span>Completar pedido</span>
