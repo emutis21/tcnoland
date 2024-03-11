@@ -21,7 +21,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
   }
 
   return (
-    <div className='flex flex-col gap-4 py-4'>
+    <div className='flex flex-col gap-4 py-4 bg-red-500'>
       <ProductCard product={product} onAdd={handleAddToCart} />
       <Link className='text-center' href='/'>
         <Button variant='primary'>Volver al catálogo</Button>

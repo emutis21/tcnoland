@@ -7,7 +7,7 @@ import ProductPageClient from './client'
 export async function generateStaticParams() {
   const products = await api.list()
 
-  return products.map((product) => ({ product: product.id }))
+  return products.map((product) => ({ product: product.id.toString() }))
 }
 
 export async function generateMetadata({

@@ -65,16 +65,26 @@ class Product implements IProduct {
   }
 }
 
-function normalize(data: (RawProduct | RawOption)[]): IProduct[] {
-  return data.map((item) => {
-    const product = new Product()
+function normalize(data: (RawProduct | RawOption | RawUnknown)[]) {
+  const products = new Map<RawProduct['id'], Product>()
 
+  for (const item of data) {
     if (item.type === 'product') {
-      product.set(item as RawProduct)
-    }
+      const baseProduct = new Product()
 
-    return product.toJSON()
-  })
+      baseProduct.set(item as RawProduct)
+
+      products.set(baseProduct.id, baseProduct)
+
+      continue
+    }
+  }
+
+  const normalized: IProduct[] = Object.values(Object.fromEntries(products)).map((product) =>
+    product.toJSON()
+  )
+
+  return normalized
 }
 
 const api = {
@@ -85,7 +95,6 @@ const api = {
       return new Promise<IProduct[]>((resolve, reject) => {
         Papa.parse(csv, {
           header: true,
-          dynamicTyping: true,
           complete: (results: Papa.ParseResult<Results>) => {
             const data = results.data as unknown as IProduct[]
 
