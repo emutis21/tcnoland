@@ -14,8 +14,9 @@
   --mix: hsl(0, 0%, 100%);
   --contrast: color-mix(in lab, currentColor 20%, var(--mix));
   --border-color: color-mix(in lab, currentColor 20%, hsla(0, 0%, 0%, 0.314));
-
-  @media (prefers-color-scheme: dark) {
+}
+@media (prefers-color-scheme: dark) {
+  :root {
     --color-background: hsl(0, 0%, 10%);
     --color-title: hsl(179, 59%, 50%);
     --color-title-hover: hsl(179, 59%, 70%);
@@ -34,6 +35,36 @@ html {
   scrollbar-gutter: stable;
   scrollbar-color: hsl(180, 98%, 32%) var(--color-background);
   scrollbar-width: thin;
+  color-scheme: dark light;
+}
+
+.light {
+  // color-scheme: light;
+  --color-background: hsl(0, 0%, 96%);
+  --color-title: hsl(181, 75%, 32%);
+  --color-title-hover: hsl(181, 75%, 38%);
+  --color-text: hsla(0, 0%, 0%, 0.8);
+  --color-nav: hsl(0, 0%, 100%);
+  --color-aside: hsl(204, 100%, 50%);
+  --color: rgba(114, 114, 114, 0.1);
+
+  --mix: hsl(0, 0%, 100%);
+  --contrast: color-mix(in lab, currentColor 20%, var(--mix));
+  --border-color: color-mix(in lab, currentColor 20%, hsla(0, 0%, 0%, 0.314));
+}
+
+.dark {
+  // color-scheme: dark;
+  --color-background: hsl(0, 0%, 10%);
+  --color-title: hsl(179, 59%, 50%);
+  --color-title-hover: hsl(179, 59%, 70%);
+  --color-text: hsla(0, 0%, 100%, 0.8);
+  --color-nav: hsl(179, 59%, 30%);
+  --color-aside: hsl(204, 100%, 80%);
+  --color: rgba(114, 114, 114, 0.1);
+
+  --mix: hsl(0, 0%, 0%);
+  --border-color: color-mix(in lab, currentColor 20%, hsla(0, 0%, 100%, 0.314));
 }
 
 body {

@@ -9,6 +9,7 @@ import api from '@/modules/product/api'
 import { useProduct } from '@/modules/product/context/client'
 import { RadioField } from './radioGruop'
 import { Checkbox } from './checkbox'
+import { ThemeSwitcher } from '@/theme/components/ThemeToggle'
 
 const WAIT_BETWEEN_CHANGES = 500
 
@@ -76,16 +77,13 @@ export const AsideComponent = () => {
 
   return (
     <aside
-      className='sticky top-2 mb-2 h-[calc(100vh-16px)] rounded-lg bg-slate-800 p-4 [grid-column:breakout-start]'
+      className='sticky top-2 flex flex-col mb-2 h-[calc(100vh-16px)] rounded-lg p-4 [grid-column:breakout-start]'
       data-type='aside'
       id='filters'
     >
-      <div
-        className='bg-background sticky top-0 z-10 flex items-center justify-between gap-4'
-        id='filters'
-      >
+      <div className='bg-background z-10 flex items-center justify-between gap-4' id='filters'>
         <div className='relative flex w-full items-center'>
-          <SearchIcon className='absolute left-3 h-4 w-4 opacity-40' />
+          <SearchIcon className='absolute left-3 h-4 w-4 text-breakerbay-700 opacity-40 dark:text-sky-100' />
           <Input
             className='w-full pl-8'
             placeholder='Samsung...'
@@ -96,9 +94,9 @@ export const AsideComponent = () => {
         </div>
       </div>
 
-      <div className='mt-3 flex flex-col gap-5'>
+      <div className='mt-3 flex flex-col gap-5 flex-1'>
         <h2 className='ml-2 text-xl font-semibold'>Marcas</h2>
-        <ul className='group w-full space-y-2 text-breakerbay-50'>
+        <ul className='group w-full space-y-2 text-breakerbay-900 dark:text-breakerbay-50'>
           <li className={isAllChecked ? 'pointer-events-none opacity-50' : ''}>
             <Checkbox
               name='all'
@@ -122,6 +120,7 @@ export const AsideComponent = () => {
           ))}
         </ul>
       </div>
+      <ThemeSwitcher />
     </aside>
   )
 }

@@ -30,7 +30,7 @@ export const PhoneContent = () => {
         </header>
         <a
           href='#'
-          className='flex w-full justify-between px-4 text-blue-400 transition-all duration-300 hover:text-blue-500'
+          className='flex w-full justify-between px-4 text-sky-700 transition-all duration-300 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-500'
         >
           <span>Todos los celulares</span>
           <Arrow className='self-center' size={20} />
@@ -44,7 +44,7 @@ export const PhoneContent = () => {
         >
           Marcas
         </h2>
-        <ul className='group w-full space-y-4 px-4 text-breakerbay-50 [&>li>a]:block [&>li>a]:border-b [&>li>a]:border-b-breakerbay-700 [&>li>a]:py-[2px] hover:[&>li>a]:border-b-breakerbay-500'>
+        <ul className='group w-full space-y-4 px-4 font-normal text-breakerbay-950 dark:text-breakerbay-50 [&>li>a]:block [&>li>a]:border-b [&>li>a]:border-b-sky-700 [&>li>a]:py-[2px] hover:[&>li>a]:border-b-breakerbay-500 dark:[&>li>a]:border-b-breakerbay-700'>
           {brands.map((brand) => (
             <li key={brand}>
               <a href='#' className='flex justify-between'>

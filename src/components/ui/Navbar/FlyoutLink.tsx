@@ -38,12 +38,12 @@ export const FlyoutLink: React.FC<FlyoutLinkProps> = ({ children, href, FlyoutCo
             exit={{ opacity: 0, y: 15 }}
             style={{ x: '-50%' }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className='absolute left-1/2 top-12 w-max rounded-lg bg-slate-50 p-6 text-breakerbay-900 shadow-xl dark:bg-slate-950 dark:text-breakerbay-200'
+            className='absolute left-1/2 top-12 w-max rounded-lg bg-sky-50 p-6 text-breakerbay-900 shadow-xl dark:bg-slate-950 dark:text-breakerbay-200'
           >
             <div className='absolute -top-6 left-0 right-0 h-6 bg-transparent' />
             <div
               className='absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 
-            bg-slate-50 dark:bg-slate-950
+            bg-sky-50 dark:bg-slate-950
             '
             />
             <FlyoutContent />

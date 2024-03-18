@@ -4,6 +4,7 @@ import { Jost } from 'next/font/google'
 import './globals.scss'
 import CartProvider from '@/modules/cart/context'
 import ProductProvider from '@/modules/product/context'
+import ThemeProvider from '@/theme/context'
 
 const jost = Jost({ subsets: ['latin'] })
 
@@ -20,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang='es'>
       <body className={jost.className}>
-        <ProductProvider>
-          <CartProvider>{children}</CartProvider>
-        </ProductProvider>
+        <ThemeProvider>
+          <ProductProvider>
+            <CartProvider>{children}</CartProvider>
+          </ProductProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
