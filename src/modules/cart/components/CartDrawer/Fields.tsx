@@ -1,26 +1,7 @@
-import { Input } from '@/components/ui/input'
 import type { Checkout, Field } from '../../types'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { RadioField } from '@/components/ui/radioGruop'
 
-function TextField({
-  value,
-  onChange,
-  ...props
-}: {
-  value: string
-  onChange: (value: string) => void
-}) {
-  return (
-    <Input
-      value={value}
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-        onChange(e.target.value)
-      }}
-      {...props}
-    />
-  )
-}
+import { Input } from '@/components/ui/input'
+import { RadioField } from '@/components/ui/radioGruop'
 
 function Fields({
   fields,
@@ -40,7 +21,7 @@ function Fields({
             {field.type === 'text' && (
               <Input
                 placeholder={field.placeholder}
-                value={checkout.get(field.title) || ''}
+                value={checkout.get(field.title) ?? ''}
                 onChange={(e) => {
                   onChange(field.title, e.target.value)
                 }}
@@ -49,13 +30,13 @@ function Fields({
             {field.type === 'radio' && (
               <RadioField
                 options={field.options}
-                value={checkout.get(field.title) || ''}
+                value={checkout.get(field.title) ?? ''}
                 onChange={(value: string) => {
                   onChange(field.title, value)
                 }}
               />
             )}
-            {field.note && <p className='text-sm text-gray-500'>{field.note}</p>}
+            {field.note ? <p className='text-sm text-gray-500'>{field.note}</p> : null}
           </div>
         </div>
       ))}

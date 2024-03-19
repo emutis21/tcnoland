@@ -4,8 +4,8 @@ import type { CartItem, Field } from '../../types'
 
 import { useEffect, useState } from 'react'
 
-import { Button } from '@/components/ui/button'
 import { WhatsappIcon } from '@/components/icons/whatsapp'
+import { Button } from '@/components/ui/button'
 
 import { useCart } from '../../context/client'
 
@@ -15,8 +15,8 @@ import Fields from './Fields'
 function CartDrawer({
   onClose,
   store,
-  fields,
-  ...props
+  fields
+  // ...props
 }: {
   onClose: () => void
   store: Store
@@ -49,12 +49,12 @@ function CartDrawer({
     <>
       {currentStep === 'details' && <Details cart={cart} onChange={handleUpdateCart} />}
 
-      {fields && currentStep === 'fields' ? (
+      {currentStep === 'fields' ? (
         <Fields checkout={checkout} fields={fields} onChange={handleUpdateField} />
       ) : null}
 
       <footer className='flex w-full flex-col justify-between gap-4 self-end border-t border-breakerbay-500/60 pt-4'>
-        {fields && currentStep === 'details' ? (
+        {currentStep === 'details' ? (
           <>
             <div className='flex items-center justify-between gap-2 text-lg font-medium'>
               <p>Total</p>
@@ -73,7 +73,7 @@ function CartDrawer({
           </>
         ) : null}
 
-        {(currentStep === 'fields' || !fields) && (
+        {currentStep === 'fields' && (
           <div className='flex w-full flex-col gap-4'>
             <Button
               className='w-full'

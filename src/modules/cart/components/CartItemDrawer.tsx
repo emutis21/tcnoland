@@ -1,28 +1,25 @@
 import type { CartItem } from '../types'
 
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { parseCurrency } from '~/currency/utils'
 
 import { Button } from '@/components/ui/button'
-import { AnimatePresence, motion } from 'framer-motion'
 
 import { getCartItemPrice } from '../utils'
-import { CloseIcon } from '@/components/icons/close'
 
 function CartItemDrawer({
   item,
-  onClose,
-  onSubmit,
-  ...props
+  // onClose,
+  onSubmit
+  // ...props
 }: {
   item: CartItem
   onClose: VoidFunction
   onSubmit: (item: CartItem) => void
 }) {
-  const [formData, setFormData] = useState<CartItem>(() => ({ ...item, options: {} }))
+  const formData = useMemo(() => ({ ...item, options: {} }), [item])
   const total = useMemo(() => parseCurrency(getCartItemPrice(formData)), [formData])
-  const options = useMemo(() => {}, [])
 
   const { brand, image, model, processor, screen } = item
 
@@ -40,7 +37,7 @@ function CartItemDrawer({
         </div>
       </div>
 
-      <footer className='flex w-full flex-col self-end gap-4 border-t-2 border-t-breakerbay-500'>
+      <footer className='flex w-full flex-col gap-4 self-end border-t-2 border-t-breakerbay-500'>
         <div className='mt-2 flex items-center justify-between text-lg font-medium'>
           <p>Total</p>
           <p>{total}</p>

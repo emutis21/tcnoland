@@ -1,6 +1,6 @@
 import type { Option as IOption, Product as IProduct, Results } from './types'
-import { notFound } from 'next/navigation'
 
+import { notFound } from 'next/navigation'
 import Papa from 'papaparse'
 
 interface RawOption extends IOption {

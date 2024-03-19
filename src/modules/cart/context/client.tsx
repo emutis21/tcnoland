@@ -4,17 +4,16 @@ import type { Store } from '~/store/types'
 
 import type { Cart, CartItem, Checkout, Field } from '../types'
 
-import useLocalStorageCart from '@/hooks/useCart'
-
 import { useState, useMemo, useCallback, useContext, createContext } from 'react'
 
 import { parseCurrency } from '~/currency/utils'
 
+import useLocalStorageCart from '@/hooks/useCart'
 import { Button } from '@/components/ui/button'
+import { SideCart } from '@/components/ui/sideCart'
 
 import CartDrawer from '../components/CartDrawer'
 import { getCartMessage, getCartTotal } from '../utils'
-import { SideCart } from '@/components/ui/sideCart'
 
 interface Context {
   state: {
@@ -56,28 +55,31 @@ function CartProviderClient({
   const addItem = useCallback(
     (id: number, value: CartItem) => {
       const newCart = new Map(cart)
+
       newCart.set(id, value)
       setCart(newCart)
     },
-    [cart]
+    [cart, setCart]
   )
 
   const removeItem = useCallback(
     (id: number) => {
       const newCart = new Map(cart)
+
       newCart.delete(id)
       setCart(newCart)
     },
-    [cart]
+    [cart, setCart]
   )
 
   const updateItem = useCallback(
     (id: number, value: CartItem) => {
       const newCart = new Map(cart)
+
       newCart.set(id, value)
       setCart(newCart)
     },
-    [cart]
+    [cart, setCart]
   )
 
   const updateField = useCallback(
@@ -93,7 +95,7 @@ function CartProviderClient({
     () => ({ checkout, cart, total, quantity, message }),
     [checkout, cart, total, quantity, message]
   )
-  
+
   const actions = useMemo(
     () => ({ updateItem, updateField, addItem, removeItem }),
     [updateItem, updateField, addItem, removeItem]
@@ -130,10 +132,10 @@ function CartProviderClient({
         )}
         <SideCart
           openModalId={isCartOpen ? 'cart' : null}
+          title='Tu pedido'
           onClose={() => {
             setIsCartOpen(false)
           }}
-          title='Tu pedido'
         >
           {Boolean(isCartOpen) && (
             <CartDrawer

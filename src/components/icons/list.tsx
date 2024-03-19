@@ -1,4 +1,4 @@
-export function AddIcon({ size = 26, className }: { size?: number; className?: string }) {
+export function ListLayoutIcon({ size = 26, className }: { size?: number; className?: string }) {
   return (
     <svg
       className={className}
@@ -13,9 +13,12 @@ export function AddIcon({ size = 26, className }: { size?: number; className?: s
       xmlns='http://www.w3.org/2000/svg'
     >
       <path d='M0 0h24v24H0z' fill='none' stroke='none' />
-      <path d='M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0' />
-      <path d='M9 12h6' />
-      <path d='M12 9v6' />
+      <path d='M9 6l11 0' />
+      <path d='M9 12l11 0' />
+      <path d='M9 18l11 0' />
+      <path d='M5 6l0 .01' />
+      <path d='M5 12l0 .01' />
+      <path d='M5 18l0 .01' />
     </svg>
   )
 }

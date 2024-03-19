@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+
 import { Jost } from 'next/font/google'
 
 import './globals.scss'
@@ -19,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='es'>
+    <html suppressHydrationWarning lang='es'>
       <body className={jost.className}>
         <ThemeProvider>
           <ProductProvider>

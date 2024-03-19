@@ -24,20 +24,7 @@ module.exports = {
     }
   },
   rules: {
-    'prettier/prettier': [
-      'warn',
-      {
-        printWidth: 100,
-        trailingComma: 'all',
-        tabWidth: 2,
-        semi: true,
-        singleQuote: false,
-        bracketSpacing: false,
-        arrowParens: 'always',
-        endOfLine: 'auto',
-        plugins: ['prettier-plugin-tailwindcss']
-      }
-    ],
+    'prettier/prettier': 'off',
     'react/no-array-index-key': 'off',
     '@typescript-eslint/no-shadow': 'off',
     'import/order': [

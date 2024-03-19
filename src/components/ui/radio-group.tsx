@@ -1,6 +1,6 @@
 'use client'
 
-type RadioGroupProps = {
+interface RadioGroupProps {
   options: { label: string; value: string }[]
   name: string
   className?: string
@@ -9,24 +9,24 @@ type RadioGroupProps = {
   children?: React.ReactNode
 }
 
-const RadioGroup: React.FC<RadioGroupProps> = ({ options, name, className, value, onChange }) => {
+export function RadioGroup({ options, name, className, value, onChange }: RadioGroupProps) {
   return (
     <div className={`${className} flex flex-col gap-3`}>
       {options.map((option, index) => (
         <RadioGroupItem
           key={index}
+          checked={value === option.value}
+          label={option.label}
           name={name}
           value={option.value}
-          checked={value === option.value}
           onChange={onChange}
-          label={option.label}
         />
       ))}
     </div>
   )
 }
 
-type RadioGroupItemProps = {
+interface RadioGroupItemProps {
   name: string
   value: string
   checked: boolean
@@ -34,26 +34,18 @@ type RadioGroupItemProps = {
   label: string
 }
 
-const RadioGroupItem: React.FC<RadioGroupItemProps> = ({
-  name,
-  value,
-  checked,
-  onChange,
-  label
-}) => {
+export function RadioGroupItem({ name, value, checked, onChange, label }: RadioGroupItemProps) {
   return (
-    <label className='flex gap-2 text-xl font-semibold w-fit cursor-pointer text-breakerbay-100 hover:text-breakerbay-300 transition-colors'>
+    <label className='flex w-fit cursor-pointer gap-2 text-xl font-semibold text-breakerbay-100 transition-colors hover:text-breakerbay-300'>
       <input
-        type='radio'
-        name={name}
-        value={value}
-        className='checked:bg-red-900'
         checked={checked}
+        className='checked:bg-red-900'
+        name={name}
+        type='radio'
+        value={value}
         onChange={(e) => onChange(e.target.value)}
       />
       {label}
     </label>
   )
 }
-
-export { RadioGroup, RadioGroupItem }

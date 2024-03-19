@@ -1,18 +1,18 @@
-export const CloseIcon = ({ size = 26, className }: { size?: number; className?: string }) => {
+export function CloseIcon({ size = 26, className }: { size?: number; className?: string }) {
   return (
     <svg
-      xmlns='http://www.w3.org/2000/svg'
-      width={size}
       className={className}
-      height={size}
-      viewBox='0 0 24 24'
-      strokeWidth='1.5'
-      stroke='currentColor'
       fill='none'
+      height={size}
+      stroke='currentColor'
       strokeLinecap='round'
       strokeLinejoin='round'
+      strokeWidth='1.5'
+      viewBox='0 0 24 24'
+      width={size}
+      xmlns='http://www.w3.org/2000/svg'
     >
-      <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+      <path d='M0 0h24v24H0z' fill='none' stroke='none' />
       <path d='M5 9l4 0l0 -4' />
       <path d='M3 3l6 6' />
       <path d='M5 15l4 0l0 4' />

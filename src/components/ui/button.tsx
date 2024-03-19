@@ -26,11 +26,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, children, ...props }, ref) => {
     const variantClass = variant ? buttonVariants[variant] : ''
     const defSize = size ? buttonSizes[size] : 'text-base'
+
     return (
       <button
         ref={ref}
         className={`${className} grid h-fit cursor-pointer touch-manipulation whitespace-nowrap rounded-lg border-0 p-1 text-white transition-all duration-300 hover:outline-0 active:scale-90 active:outline-0 [&>span]:hover:bg-transparent ${variantClass} ${defSize}`}
         {...props}
+        type='button'
       >
         <span className='h-full w-full rounded-md duration-200'>{children}</span>
       </button>

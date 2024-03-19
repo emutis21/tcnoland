@@ -1,6 +1,6 @@
 import { RadioGroup, RadioGroupItem } from './radio-group'
 
-type RadioFieldProps = {
+interface RadioFieldProps {
   options: string[]
   onChange: (value: string) => void
   value: string
@@ -13,18 +13,18 @@ export function RadioField({ value, onChange, options }: RadioFieldProps) {
     <RadioGroup
       className=''
       name='radiofield'
+      options={radioOptions}
       value={value}
       onChange={onChange}
-      options={radioOptions}
     >
       {options.map((option, index) => (
         <RadioGroupItem
           key={index}
+          checked={value === option}
+          label={option}
           name='radiofield'
           value={option}
-          checked={value === option}
           onChange={onChange}
-          label={option}
         />
       ))}
     </RadioGroup>

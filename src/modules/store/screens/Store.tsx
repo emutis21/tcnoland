@@ -6,16 +6,24 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { useCart } from '~/cart/context/client'
 
-import CartItemDrawer from '@/modules/cart/components/CartItemDrawer'
-import { Button } from '@/components/ui/button'
-import { CartItem } from '@/modules/cart/types'
-import { parseCurrency } from '@/modules/currency/utils'
-import ProductCard from '@/modules/product/components/ProductCard'
-import { AnimatePresence, motion } from 'framer-motion'
+import { GridLayoutIcon } from '@/components/icons/grid'
+import { ListLayoutIcon } from '@/components/icons/list'
 import { SideCart } from '@/components/ui/sideCart'
-import { SearchIcon } from '@/components/icons/search'
-import { Input } from '@/components/ui/input'
-import { AsideComponent } from '@/components/ui/aside'
+import CartItemDrawer from '@/modules/cart/components/CartItemDrawer'
+import { type CartItem } from '@/modules/cart/types'
+import ProductCard from '@/modules/product/components/ProductCard'
+
+function getInitialLayout(): 'gridLayout' | 'listLayout' {
+  if (typeof window !== 'undefined') {
+    const savedLayout = localStorage.getItem('layout')
+
+    if (savedLayout === 'gridLayout' || savedLayout === 'listLayout') {
+      return savedLayout as 'gridLayout' | 'listLayout'
+    }
+  }
+
+  return 'gridLayout'
+}
 
 function StoreScreen({
   query,
@@ -26,50 +34,10 @@ function StoreScreen({
   brand?: string
   products: Product[]
 }) {
-  const [state, { addItem }] = useCart()
+  const [, { addItem }] = useCart()
+
+  const [layout, setLayout] = useState<'gridLayout' | 'listLayout'>(getInitialLayout)
   const [openModalId, setOpenModalId] = useState<string | null>(null)
-
-  const [selectedCategory, setSelectedCategory] = useState<Product['brand'] | null>(null)
-  const categories = useMemo<[Product['screen'], Product[]][]>(() => {
-    let draft = products
-
-    if (query) {
-      draft = draft.filter(({ brand, processor }) =>
-        [brand, processor].some((field) => field.toLowerCase().includes(query.toLowerCase()))
-      )
-    }
-
-    const groups = draft.reduce<Map<Product['screen'], Product[]>>((map, product) => {
-      if (!map.has(product.screen)) {
-        map.set(product.screen, [])
-      }
-
-      map.get(product.screen)!.push(product)
-      return map
-    }, new Map())
-
-    return Array.from(groups.entries())
-  }, [query, products])
-
-  function handleSelectCategory(category: Product['brand']) {
-    setSelectedCategory((currentSelectedCategory) =>
-      currentSelectedCategory === category ? null : category
-    )
-
-    // queueMicrotask(() => {
-    //   const categoryElement = document.getElementById(category)!
-    //   const filtersElement = document.getElementById('filters')!
-    //   const offset = filtersElement.getBoundingClientRect().height
-    //   const bodyRect = document.body.getBoundingClientRect().top
-    //   const elementRect = categoryElement.getBoundingClientRect().top
-    //   const elementPosition = elementRect - bodyRect
-    //   const offsetPosition = elementPosition - offset
-
-    //   window.scrollTo({
-    //     top: offsetPosition
-    //   })
-    // })
-  }
 
   const filteredProducts = useMemo(() => {
     let result = products
@@ -87,57 +55,105 @@ function StoreScreen({
         result = result.filter((product) => product.brand === brand)
       }
     }
+
     return result
-  }, [products, query])
+  }, [products, query, brand])
+
+  function handleLayoutChange(newLayout: 'gridLayout' | 'listLayout') {
+    setLayout(newLayout)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('layout', newLayout)
+    }
+  }
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('layout', layout)
+    }
+  }, [layout])
+
+  function getLayoutClass(layout: 'gridLayout' | 'listLayout'): string {
+    if (layout === 'listLayout') {
+      return 'product__list'
+    }
+
+    const result = 'product__grid'
+
+    return result
+  }
 
   return (
-    <>
-      <main className='grid h-fit w-full gap-8 [grid-template-columns:_1fr]'>
-        {filteredProducts.length !== 0 ? (
-          <ul className='product__grid gap-x-14 gap-y-12 lg:gap-x-12'>
-            {filteredProducts.map((product) => (
-              <li
-                key={product.id}
-                className='product max-w-[380px] cursor-pointer'
-                data-featured='true'
-                onClick={() => {
-                  if (setOpenModalId) setOpenModalId(product.id)
-                }}
-              >
-                <ProductCard
-                  product={product}
-                  onAdd={(item: Product) => {
-                    addItem(Date.now(), { ...item, quantity: 1 })
-                  }}
-                  setOpenModalId={setOpenModalId}
-                />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className='flex bg-violelt-800 py-4 h-screen items-start justify-start'>
-            <p className='text-2xl font-semibold'>No se encontraron productos</p>
-          </div>
-        )}
-
-        <SideCart
-          openModalId={openModalId}
-          onClose={() => setOpenModalId(null)}
-          title='Agregar al carrito'
+    <main className='relative grid h-fit w-full gap-8 [grid-template-columns:_1fr]'>
+      <div className='absolute -top-12 flex gap-3 justify-self-end'>
+        <button
+          className={`${layout === 'listLayout' ? 'border border-sky-500 bg-slate-300 text-breakerbay-800 dark:bg-slate-700 dark:text-breakerbay-50' : ''} flex items-center justify-center rounded-md border border-transparent p-1 transition-colors duration-300 hover:bg-slate-300 focus:bg-slate-300 dark:hover:bg-slate-700 dark:focus:bg-slate-700`}
+          title='Listado de productos'
+          type='button'
+          onClick={() => handleLayoutChange('listLayout')}
         >
-          <CartItemDrawer
-            item={{ ...products.find((product) => product.id === openModalId)!, quantity: 1 }}
-            onClose={() => {
-              setOpenModalId(null)
-            }}
-            onSubmit={(item: CartItem) => {
-              addItem(Date.now(), { ...item, quantity: 1 })
-              setOpenModalId(null)
-            }}
-          />
-        </SideCart>
-      </main>
-    </>
+          <ListLayoutIcon />
+        </button>
+        <button
+          className={`${layout === 'gridLayout' ? 'border border-sky-500 bg-slate-300 text-breakerbay-800 dark:bg-slate-700 dark:text-breakerbay-50' : ''} flex items-center justify-center rounded-md border border-transparent p-1 transition-colors duration-300 hover:bg-slate-300 focus:bg-slate-300 dark:hover:bg-slate-700 dark:focus:bg-slate-700`}
+          title='Cuadrícula de productos'
+          type='button'
+          onClick={() => handleLayoutChange('gridLayout')}
+        >
+          <GridLayoutIcon />
+        </button>
+      </div>
+      {filteredProducts.length !== 0 ? (
+        <ul key={layout} className={getLayoutClass(layout)} id='products__layout'>
+          {filteredProducts.map((product) => (
+            <li
+              key={product.id}
+              className='product cursor-pointer'
+              data-featured='true'
+              /* eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role */
+              role='button'
+              tabIndex={0}
+              onClick={() => {
+                setOpenModalId(product.id)
+              }}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  setOpenModalId(product.id)
+                }
+              }}
+            >
+              <ProductCard
+                product={product}
+                setOpenModalId={setOpenModalId}
+                onAdd={(item: Product) => {
+                  addItem(Date.now(), { ...item, quantity: 1 })
+                }}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className='bg-violelt-800 flex h-screen items-start justify-start py-4'>
+          <p className='text-2xl font-semibold'>No se encontraron productos</p>
+        </div>
+      )}
+
+      <SideCart
+        openModalId={openModalId}
+        title='Agregar al carrito'
+        onClose={() => setOpenModalId(null)}
+      >
+        <CartItemDrawer
+          item={{ ...products.find((product) => product.id === openModalId)!, quantity: 1 }}
+          onClose={() => {
+            setOpenModalId(null)
+          }}
+          onSubmit={(item: CartItem) => {
+            addItem(Date.now(), { ...item, quantity: 1 })
+            setOpenModalId(null)
+          }}
+        />
+      </SideCart>
+    </main>
   )
 }
 

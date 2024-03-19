@@ -1,7 +1,8 @@
 'use client'
 
-import { Cart } from '@/modules/cart/types'
 import { useState, useEffect } from 'react'
+
+import { type CartItem, type Cart } from '@/modules/cart/types'
 
 export default function useLocalStorageCart(): [Cart, (cart: Cart) => void] {
   const [cart, setCart] = useState<Cart>(new Map())
@@ -9,7 +10,8 @@ export default function useLocalStorageCart(): [Cart, (cart: Cart) => void] {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedCart = localStorage.getItem('cart')
-      setCart(storedCart ? new Map(JSON.parse(storedCart)) : new Map())
+
+      setCart(storedCart ? new Map(JSON.parse(storedCart) as [number, CartItem][]) : new Map())
     }
   }, [])
 

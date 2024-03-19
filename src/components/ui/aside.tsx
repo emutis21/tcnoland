@@ -1,19 +1,20 @@
 'use client'
 
-import { useMemo, useState } from 'react'
-import { SearchIcon } from '../icons/search'
-import { Input } from './input'
-import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useMemo } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-import api from '@/modules/product/api'
+
 import { useProduct } from '@/modules/product/context/client'
-import { RadioField } from './radioGruop'
-import { Checkbox } from './checkbox'
 import { ThemeSwitcher } from '@/theme/components/ThemeToggle'
+
+import { SearchIcon } from '../icons/search'
+
+import { Checkbox } from './checkbox'
+import { Input } from './input'
 
 const WAIT_BETWEEN_CHANGES = 500
 
-export const AsideComponent = () => {
+export function AsideComponent() {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
@@ -43,7 +44,7 @@ export const AsideComponent = () => {
   }, WAIT_BETWEEN_CHANGES)
 
   const handleBrand = (value: string | null, checked: boolean) => {
-    let params = new URLSearchParams(searchParams)
+    const params = new URLSearchParams(searchParams)
 
     if (params.has('query')) {
       document.querySelector<HTMLInputElement>('input[type=search]')!.value = ''
@@ -56,8 +57,8 @@ export const AsideComponent = () => {
       params.append('brand', value)
     } else {
       if (value !== null) {
-        let brands = params.getAll('brand')
-        let index = brands.indexOf(value)
+        const brands = params.getAll('brand')
+        const index = brands.indexOf(value)
 
         if (index !== -1) {
           brands.splice(index, 1)
@@ -72,12 +73,13 @@ export const AsideComponent = () => {
 
   const isAllChecked = useMemo(() => {
     const brands = searchParams.getAll('brand')
+
     return brands.length === 0
   }, [searchParams])
 
   return (
     <aside
-      className='sticky top-2 flex flex-col mb-2 h-[calc(100vh-16px)] rounded-lg p-4 [grid-column:breakout-start]'
+      className='sticky top-2 mb-2 flex h-[calc(100vh-16px)] flex-col rounded-lg p-4 [grid-column:breakout-start]'
       data-type='aside'
       id='filters'
     >
@@ -86,23 +88,23 @@ export const AsideComponent = () => {
           <SearchIcon className='absolute left-3 h-4 w-4 text-breakerbay-700 opacity-40 dark:text-sky-100' />
           <Input
             className='w-full pl-8'
+            defaultValue={searchParams.get('query')?.toString()}
             placeholder='Samsung...'
             type='search'
-            defaultValue={searchParams.get('query')?.toString()}
             onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
       </div>
 
-      <div className='mt-3 flex flex-col gap-5 flex-1'>
+      <div className='mb-4 mt-3 flex flex-1 flex-col gap-5'>
         <h2 className='ml-2 text-xl font-semibold'>Marcas</h2>
         <ul className='group w-full space-y-2 text-breakerbay-900 dark:text-breakerbay-50'>
           <li className={isAllChecked ? 'pointer-events-none opacity-50' : ''}>
             <Checkbox
-              name='all'
-              disabled={isAllChecked}
-              onChange={handleBrand}
               checked={isAllChecked}
+              disabled={isAllChecked}
+              name='all'
+              onChange={handleBrand}
             >
               Todos
             </Checkbox>
@@ -110,8 +112,8 @@ export const AsideComponent = () => {
           {brands.map((brand) => (
             <li key={brand}>
               <Checkbox
-                name={brand}
                 checked={searchParams.getAll('brand').includes(brand)}
+                name={brand}
                 onChange={handleBrand}
               >
                 {brand}
