@@ -6,6 +6,8 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { useCart } from '~/cart/context/client'
 
+import '@/styles/products.scss'
+
 import { GridLayoutIcon } from '@/components/icons/grid'
 import { ListLayoutIcon } from '@/components/icons/list'
 import { SideCart } from '@/components/ui/sideCart'

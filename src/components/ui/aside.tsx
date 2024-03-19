@@ -12,6 +12,8 @@ import { SearchIcon } from '../icons/search'
 import { Checkbox } from './checkbox'
 import { Input } from './input'
 
+import '@/styles/checkbox.scss'
+
 const WAIT_BETWEEN_CHANGES = 500
 
 export function AsideComponent() {

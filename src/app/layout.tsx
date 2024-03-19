@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import { Jost } from 'next/font/google'
 
-import './globals.scss'
+import '@/styles/globals.scss'
 import CartProvider from '@/modules/cart/context'
 import ProductProvider from '@/modules/product/context'
 import ThemeProvider from '@/theme/context'
