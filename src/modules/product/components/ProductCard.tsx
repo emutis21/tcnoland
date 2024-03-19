@@ -38,6 +38,7 @@ function ProductCard({
           <img
             alt={model}
             className='transform object-cover transition-[scale] ease-in-out'
+            decoding='async'
             loading='lazy'
             src={image}
           />
