@@ -82,6 +82,7 @@ function StoreScreen({
     const result = 'product__grid'
 
     return result
+    // TODO: fix layout
   }
 
   return (
