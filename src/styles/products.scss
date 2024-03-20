@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 285px), 1fr));
   gap: 1.5rem;
+  padding-bottom: 0.5rem;
 
   // @media (max-width: 620px) {
   //   grid-template-columns: 1fr;
@@ -111,6 +112,7 @@
   grid-auto-flow: dense;
   grid-auto-rows: 1fr auto auto;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 264px), 1fr));
+  margin-bottom: 0.5rem;
 
   row-gap: 3rem;
   column-gap: 1.5rem;
