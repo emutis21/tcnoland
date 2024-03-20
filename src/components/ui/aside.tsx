@@ -98,8 +98,8 @@ export function AsideComponent() {
         </div>
       </div>
 
-      <div className='mb-4 mt-3 flex flex-1 flex-col gap-5'>
-        <h2 className='ml-2 text-xl font-semibold'>Marcas</h2>
+      <h2 className='my-3 ml-2 text-xl font-semibold'>Marcas</h2>
+      <div className='mb-4 flex flex-1 flex-col gap-5 overflow-y-auto [scrollbar-color:_#0099ff90_var(--color)] [scrollbar-width:_thin]'>
         <ul className='group w-full space-y-2 text-breakerbay-900 dark:text-breakerbay-50'>
           <li className={isAllChecked ? 'pointer-events-none opacity-50' : ''}>
             <Checkbox
