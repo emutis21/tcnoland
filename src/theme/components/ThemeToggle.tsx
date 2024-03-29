@@ -23,7 +23,7 @@ export function ThemeSwitcher() {
         type='button'
         onClick={() => setTheme('system')}
       >
-        <DesktopIcon className='h-4 w-4 md:h-5 md:w-5 lg:h-6 lg:w-6' />
+        <DesktopIcon className='h-5 w-5 md:h-6 md:w-6' />
       </button>
       <button
         className={`${theme === 'light' ? 'bg-slate-300 dark:bg-slate-700' : ''} transitions-colors rounded-md p-2 duration-300 hover:bg-slate-300 focus:bg-slate-300 dark:hover:bg-slate-700 dark:focus:bg-slate-700`}
@@ -31,7 +31,7 @@ export function ThemeSwitcher() {
         type='button'
         onClick={() => setTheme('light')}
       >
-        <SunIcon className='h-4 w-4 md:h-5 md:w-5 lg:h-6 lg:w-6' />
+        <SunIcon className='h-5 w-5 md:h-6 md:w-6' />
       </button>
       <button
         className={`${theme === 'dark' ? 'bg-slate-300 dark:bg-slate-700' : ''} transitions-colors rounded-md p-2 duration-300 hover:bg-slate-300 focus:bg-slate-300 dark:hover:bg-slate-700 dark:focus:bg-slate-700`}
@@ -39,7 +39,7 @@ export function ThemeSwitcher() {
         type='button'
         onClick={() => setTheme('dark')}
       >
-        <MoonIcon className='h-4 w-4 md:h-5 md:w-5 lg:h-6 lg:w-6' />
+        <MoonIcon className='h-5 w-5 md:h-6 md:w-6' />
       </button>
     </div>
   )

@@ -3,7 +3,6 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 285px), 1fr));
   gap: 1.5rem;
   padding-bottom: 0.5rem;
-
   // @media (max-width: 620px) {
   //   grid-template-columns: 1fr;
 
@@ -14,6 +13,7 @@
     border-radius: 0.5rem;
     overflow: hidden;
     max-width: 100%;
+    height: fit-content;
 
     grid-template-columns: 6rem 16px auto;
     grid-template-rows: 6rem auto;
