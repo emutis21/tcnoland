@@ -32,13 +32,12 @@ export function SideCart({
             top-0
             z-50
             flex
-            h-screen
+            h-[100svh]
             w-full
             flex-col
             gap-8
             bg-black/80 backdrop-blur-[2px]
           '
-          data-testid='cart-item-drawer'
           exit={{ opacity: 0, x: 15 }}
           initial={{ opacity: 0, x: 15 }}
           transition={{ duration: 0.15, ease: 'easeInOut' }}
@@ -51,10 +50,10 @@ export function SideCart({
           <motion.aside
             key={openModalId}
             layout
-            className='flex h-full w-[450px] flex-col justify-between gap-12 self-end overflow-y-auto border-l-4 border-l-breakerbay-500 bg-breakerbay-500 p-8 text-breakerbay-50 dark:bg-slate-950'
+            className='flex h-full w-[85%] flex-col justify-between gap-12 self-end overflow-y-auto border-l-4 border-l-breakerbay-500 bg-breakerbay-500 p-8 text-breakerbay-50 dark:bg-slate-950 md:w-[450px]'
           >
             <header className='flex flex-grow-0 items-start justify-between'>
-              <h2 className='text-3xl font-semibold'>{title}</h2>
+              <h2 className='text-2xl font-semibold md:text-3xl'>{title}</h2>
               <button
                 className='-my-1 rounded-full bg-breakerbay-900 p-2 text-breakerbay-50 transition-all duration-300 hover:text-breakerbay-200 active:scale-90 dark:hover:bg-breakerbay-950 '
                 type='button'

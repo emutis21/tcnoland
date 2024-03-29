@@ -12,11 +12,12 @@ import { SearchIcon } from '../icons/search'
 import { Checkbox } from './checkbox'
 import { Input } from './input'
 
+import '@/styles/aside.scss'
 import '@/styles/checkbox.scss'
 
 const WAIT_BETWEEN_CHANGES = 500
 
-export function AsideComponent() {
+export function AsideComponent({ nav }: { nav?: boolean }) {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
@@ -80,18 +81,14 @@ export function AsideComponent() {
   }, [searchParams])
 
   return (
-    <aside
-      className='sticky top-2 mb-2 flex h-[calc(100vh-16px)] flex-col rounded-lg p-4 [grid-column:breakout-start]'
-      data-type='aside'
-      id='filters'
-    >
+    <aside className={nav ? 'block' : 'hidden'} data-type='aside' id='filters'>
       <div className='bg-background z-10 flex items-center justify-between gap-4' id='filters'>
         <div className='relative flex w-full items-center'>
           <SearchIcon className='absolute left-3 h-4 w-4 text-breakerbay-700 opacity-40 dark:text-sky-100' />
           <Input
             className='w-full pl-8'
             defaultValue={searchParams.get('query')?.toString()}
-            placeholder='Samsung...'
+            placeholder='IPhone...'
             type='search'
             onChange={(e) => handleSearch(e.target.value)}
           />

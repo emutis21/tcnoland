@@ -15,6 +15,7 @@ export function FlyoutLink({ children, href, FlyoutContent }: FlyoutLinkProps) {
   return (
     <div
       className='group relative h-fit w-fit text-breakerbay-800 hover:text-breakerbay-500 dark:text-breakerbay-50 dark:hover:text-breakerbay-200'
+      id='flyout-link'
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >

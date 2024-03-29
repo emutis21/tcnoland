@@ -1,0 +1,21 @@
+body [data-type='aside'] {
+  color: var(--color-aside);
+  background-color: var(--contrast);
+  border: 2px solid var(--border-color);
+
+  position: sticky;
+  top: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  height: calc(100svh - 16px);
+  flex-direction: column;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  grid-column: breakout-start;
+}
+
+@media (max-width: 705px) {
+  body [data-type='aside'] {
+    display: none;
+  }
+}
