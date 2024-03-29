@@ -27,6 +27,16 @@ module.exports = {
     'prettier/prettier': 'off',
     'react/no-array-index-key': 'off',
     '@typescript-eslint/no-shadow': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        labelComponents: ['label'],
+        labelAttributes: ['htmlFor'],
+        controlComponents: ['input'],
+        assert: 'either',
+        depth: 3
+      }
+    ],
     'import/order': [
       'warn',
       {
