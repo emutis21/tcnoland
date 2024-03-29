@@ -14,7 +14,7 @@ function Details({
   onChange: (id: number, item: CartItem) => void
 }) {
   return (
-    <div className='-mr-3 flex flex-1 flex-col gap-10 divide-y divide-breakerbay-50/60 overflow-y-auto pr-[3px] [scrollbar-color:_#0099ff90_var(--color)] [scrollbar-width:_thin]'>
+    <div className='-mr-3 flex flex-1 flex-col gap-10 divide-y divide-breakerbay-50/60 overflow-y-auto [scrollbar-color:_#0099ff90_var(--color)] [scrollbar-width:_thin] md:pr-[3px]'>
       {Array.from(cart.entries()).map(([id, item]) => (
         <div
           key={id.toString()}
