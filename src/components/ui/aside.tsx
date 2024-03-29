@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useReducer } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { useProduct } from '@/modules/product/context/client'
@@ -17,11 +17,34 @@ import '@/styles/checkbox.scss'
 
 const WAIT_BETWEEN_CHANGES = 500
 
-export function AsideComponent({ nav }: { nav?: boolean }) {
+const initialState = {}
+
+type State = Record<string, boolean>
+
+interface Action {
+  type: string
+  brand?: string | null
+  newState?: State
+}
+
+const reducer = (stateCheckbox: State, action: Action): State => {
+  if (action.type === 'toggle') {
+    return { ...stateCheckbox, [action.brand ?? '']: !stateCheckbox[action.brand ?? ''] }
+  }
+
+  if (action.type === 'set') {
+    return action.newState ?? {}
+  }
+
+  throw new Error()
+}
+
+export function AsideComponent() {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
   const [state] = useProduct()
+  const [stateCheckbox, dispatch] = useReducer(reducer, initialState)
 
   const { products } = state
 
@@ -45,6 +68,16 @@ export function AsideComponent({ nav }: { nav?: boolean }) {
 
     router.push(`${pathname}?${params.toString()}`, { scroll: false })
   }, WAIT_BETWEEN_CHANGES)
+
+  useEffect(() => {
+    const brands = searchParams.getAll('brand')
+    const newState: Record<string, boolean> = {}
+
+    brands.forEach((brand) => {
+      newState[brand] = true
+    })
+    dispatch({ type: 'set', newState })
+  }, [searchParams])
 
   const handleBrand = (value: string | null, checked: boolean) => {
     const params = new URLSearchParams(searchParams)
@@ -72,6 +105,8 @@ export function AsideComponent({ nav }: { nav?: boolean }) {
     }
 
     router.push(`${pathname}?${params.toString()}`, { scroll: false })
+
+    dispatch({ type: 'toggle', brand: value })
   }
 
   const isAllChecked = useMemo(() => {
@@ -81,8 +116,8 @@ export function AsideComponent({ nav }: { nav?: boolean }) {
   }, [searchParams])
 
   return (
-    <aside className={nav ? 'block' : 'hidden'} data-type='aside' id='filters'>
-      <div className='bg-background z-10 flex items-center justify-between gap-4' id='filters'>
+    <aside className='' data-type='aside' id='filters'>
+      <div className='flex items-center justify-between gap-4' id='filters'>
         <div className='relative flex w-full items-center'>
           <SearchIcon className='absolute left-3 h-4 w-4 text-breakerbay-700 opacity-40 dark:text-sky-100' />
           <Input
@@ -110,11 +145,7 @@ export function AsideComponent({ nav }: { nav?: boolean }) {
           </li>
           {brands.map((brand) => (
             <li key={brand}>
-              <Checkbox
-                checked={searchParams.getAll('brand').includes(brand)}
-                name={brand}
-                onChange={handleBrand}
-              >
+              <Checkbox checked={stateCheckbox[brand] || false} name={brand} onChange={handleBrand}>
                 {brand}
               </Checkbox>
             </li>
