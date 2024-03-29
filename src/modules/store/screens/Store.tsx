@@ -10,11 +10,11 @@ import '@/styles/products.scss'
 
 import { GridLayoutIcon } from '@/components/icons/grid'
 import { ListLayoutIcon } from '@/components/icons/list'
+import { LoaderComponent } from '@/components/ui/loader'
 import { SideCart } from '@/components/ui/sideCart'
 import CartItemDrawer from '@/modules/cart/components/CartItemDrawer'
 import { type CartItem } from '@/modules/cart/types'
 import ProductCard from '@/modules/product/components/ProductCard'
-import { LoaderComponent } from '@/components/ui/loader'
 
 function StoreScreen({
   query,
@@ -70,7 +70,7 @@ function StoreScreen({
   }
 
   return (
-    <main className='relative grid h-fit w-full gap-8 [grid-template-columns:_1fr]'>
+    <main className='relative grid h-fit min-h-[calc(100svh-20rem)] w-full gap-8 [grid-template-columns:_1fr] md:min-h-fit'>
       {isLoading ? null : (
         <div className='absolute -top-12 flex gap-3 justify-self-end'>
           <button
@@ -93,7 +93,7 @@ function StoreScreen({
       )}
       {filteredProducts.length !== 0 ? (
         isLoading ? (
-          <div className='absolute h-screen w-full'>
+          <div className='absolute h-[100svh] w-full'>
             <LoaderComponent className=' left-1/2 top-1/4' />
           </div>
         ) : (
