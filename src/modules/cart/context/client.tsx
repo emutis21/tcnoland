@@ -105,14 +105,13 @@ function CartProviderClient({
     <CartContext.Provider value={{ state, actions }}>
       <>
         {children}
-        {/* Cart button */}
         {Boolean(quantity) && (
           <div className='sticky bottom-0 flex content-center items-center pb-4 sm:m-auto'>
             <Button
               aria-label='Ver pedido'
               className='m-auto w-full shadow-lg sm:w-fit'
               data-testid='show-cart'
-              size='lg'
+              size='md'
               variant='primary'
               onClick={() => {
                 setIsCartOpen(true)
@@ -122,7 +121,7 @@ function CartProviderClient({
                 <div className='flex items-center gap-2'>
                   <p className='leading-6'>Ver pedido</p>
                   <p className='rounded-sm bg-black/25 px-2 py-1 text-sm font-semibold text-white/90'>
-                    {quantity} item
+                    {quantity} {quantity > 1 ? 'items' : 'item'}
                   </p>
                 </div>
                 <p className='leading-6'>{total}</p>
