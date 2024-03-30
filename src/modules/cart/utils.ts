@@ -13,6 +13,10 @@ export function getCartTotal(cart: Cart): number {
 }
 
 export function getCartMessage(cart: Cart, checkout: Checkout): string {
+  const cartItems = Array.from(cart.values())
+
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0)
+
   const items = Array.from(cart.values())
     .map(
       (item) =>
@@ -25,11 +29,10 @@ export function getCartMessage(cart: Cart, checkout: Checkout): string {
     .join('\n')
 
   const total = `*Total:* ${parseCurrency(getCartTotal(cart))}`
-  const body = `*¡Hola!*\n${
-    items.length > 1
+  const interest =
+    totalQuantity > 1
       ? 'Estoy interesado en los siguientes productos:'
       : 'Estoy interesado en el siguiente producto:'
-  }\n\n${items}\n\n${fields}\n\n${total}\n\n¡Muchas gracias!`
 
-  return body
+  return `*¡Hola!*\n${interest}\n\n${items}\n\n${fields}\n\n${total}\n\n¡Muchas gracias!`
 }
