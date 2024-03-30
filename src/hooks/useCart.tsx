@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { type CartItem, type Cart } from '~/cart/types'
 
-import { type CartItem, type Cart } from '@/modules/cart/types'
+import { useState, useEffect } from 'react'
 
 export default function useLocalStorageCart(): [Cart, (cart: Cart) => void] {
   const [cart, setCart] = useState<Cart>(new Map())
@@ -22,6 +22,7 @@ export default function useLocalStorageCart(): [Cart, (cart: Cart) => void] {
         localStorage.setItem('cart', JSON.stringify(Array.from(newCart.entries())))
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error)
     }
   }

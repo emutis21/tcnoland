@@ -1,6 +1,6 @@
-import { useMemo } from 'react'
+import { type Product } from '~/product/types'
 
-import { type Product } from '@/modules/product/types'
+import { useMemo } from 'react'
 
 const useFilteredProducts = (products: Product[], query: string, brands: string[]) => {
   return useMemo(() => {
