@@ -25,8 +25,8 @@ export default async function Home({
         Store
       </h1>
 
-      <SocialMedia store={store} />
-      <div className='[grid-column:breakout-start]'>
+      <div className='relative [grid-column:breakout-start]'>
+        <SocialMedia store={store} />
         <AsideComponent />
       </div>
       <StoreScreen brand={brand} products={products} query={query} />
