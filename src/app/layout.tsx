@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: 'https://tcnoland.vercel.app/assets/tcno.webp',
-        width: 400,
-        height: 400,
+        width: 300,
+        height: 300,
         alt: 'Tcnoland'
       }
     ]
