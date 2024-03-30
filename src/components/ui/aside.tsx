@@ -124,7 +124,7 @@ export function AsideComponent() {
           <Input
             className='w-full pl-8'
             defaultValue={searchParams.get('query')?.toString()}
-            placeholder='IPhone...'
+            placeholder='iPhone...'
             type='search'
             onChange={(e) => handleSearch(e.target.value)}
           />
