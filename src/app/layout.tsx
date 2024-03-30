@@ -14,7 +14,21 @@ const jost = Jost({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Tcnoland',
-  description: 'Una página web fantástica de venta de celulares'
+  description: 'Una página web fantástica de venta de celulares',
+  openGraph: {
+    type: 'website',
+    locale: 'es_ES',
+    url: 'https://tcnoland.vercel.app/',
+    siteName: 'Tcnoland',
+    images: [
+      {
+        url: 'https://tcnoland.vercel.app/assets/tcno.webp',
+        width: 400,
+        height: 400,
+        alt: 'Tcnoland'
+      }
+    ]
+  }
 }
 
 export default function RootLayout({
