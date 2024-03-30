@@ -98,32 +98,38 @@ function StoreScreen({
           </div>
         ) : (
           <ul className={layout === 'listLayout' ? 'product__list' : 'product__grid'}>
-            {filteredProducts.map((product) => (
-              <li
-                key={product.id}
-                className='product cursor-pointer'
-                data-featured='true'
-                /* eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role */
-                role='button'
-                tabIndex={0}
-                onClick={() => {
-                  setOpenModalId(product.id)
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') {
+            {filteredProducts.map((product) => {
+              if (!product.model || !product.price || !product.processor) {
+                return null
+              }
+
+              return (
+                <li
+                  key={product.id}
+                  className='product cursor-pointer'
+                  data-featured='true'
+                  /* eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role */
+                  role='button'
+                  tabIndex={0}
+                  onClick={() => {
                     setOpenModalId(product.id)
-                  }
-                }}
-              >
-                <ProductCard
-                  product={product}
-                  setOpenModalId={setOpenModalId}
-                  onAdd={(item: Product) => {
-                    addItem(Date.now(), { ...item, quantity: 1 })
                   }}
-                />
-              </li>
-            ))}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      setOpenModalId(product.id)
+                    }
+                  }}
+                >
+                  <ProductCard
+                    product={product}
+                    setOpenModalId={setOpenModalId}
+                    onAdd={(item: Product) => {
+                      addItem(Date.now(), { ...item, quantity: 1 })
+                    }}
+                  />
+                </li>
+              )
+            })}
           </ul>
         )
       ) : (

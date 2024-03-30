@@ -5,5 +5,7 @@ export interface Store {
   banner: string
   instagram: string
   whatsapp: string
+  facebook: string
+  twitter: string
   phone: string
 }

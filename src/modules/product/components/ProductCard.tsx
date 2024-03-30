@@ -1,6 +1,10 @@
 'use client'
 
+import { type CartItem } from '~/cart/types'
+
 import type { Product } from '../types'
+
+import { useMemo } from 'react'
 
 import { parseCurrency } from '~/currency/utils'
 
@@ -16,9 +20,8 @@ function ProductCard({
   onAdd: (product: Product) => void
   setOpenModalId?: (id: string | null) => void
 }) {
-  // const cartItem = useMemo<CartItem>(() => ({ ...product, quantity: 1 }), [product])
-
   const { image, model, price, processor } = product
+  const cartItem = useMemo<CartItem>(() => ({ ...product, quantity: 1 }), [product])
 
   return (
     <>
@@ -28,7 +31,7 @@ function ProductCard({
         onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
           e.stopPropagation()
           e.preventDefault()
-          onAdd(product)
+          onAdd(cartItem)
         }}
       >
         <AddIcon className='h-6 w-6' />
@@ -43,7 +46,7 @@ function ProductCard({
           />
         </figcaption>
       ) : (
-        <div className='flex h-32 items-center justify-center bg-slate-950'>
+        <div className='flex h-full items-center justify-center bg-slate-950 text-center'>
           <p className='text-white'>Aún no tenemos la imagen</p>
         </div>
       )}
@@ -65,7 +68,7 @@ function ProductCard({
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation()
               e.preventDefault()
-              onAdd(product)
+              onAdd(cartItem)
             }}
           >
             Add to cart
