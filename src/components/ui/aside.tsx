@@ -4,7 +4,8 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useMemo, useReducer } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { useProduct } from '@/modules/product/context/client'
+import { useProduct } from '~/product/context/client'
+
 import { ThemeSwitcher } from '@/theme/components/ThemeToggle'
 
 import { SearchIcon } from '../icons/search'
@@ -104,7 +105,7 @@ export function AsideComponent() {
       }
     }
 
-    router.push(`${pathname}?${params.toString()}`, { scroll: false })
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
 
     dispatch({ type: 'toggle', brand: value })
   }

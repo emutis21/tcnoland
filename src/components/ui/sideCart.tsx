@@ -50,7 +50,7 @@ export function SideCart({
           <motion.aside
             key={openModalId}
             layout
-            className='flex h-full w-[85%] flex-col justify-between gap-12 self-end overflow-y-auto border-l-4 border-l-breakerbay-500 bg-breakerbay-500 p-8 text-breakerbay-50 dark:bg-slate-950 md:w-[450px]'
+            className='flex h-full w-[85%] flex-col justify-between gap-12 self-end overflow-y-auto border-l-4 border-l-breakerbay-500 bg-cyan-700 p-8 text-breakerbay-50 dark:bg-slate-950 md:w-[450px]'
           >
             <header className='flex flex-grow-0 items-start justify-between'>
               <h2 className='text-2xl font-semibold md:text-3xl'>{title}</h2>

@@ -36,7 +36,7 @@ interface RadioGroupItemProps {
 
 export function RadioGroupItem({ name, value, checked, onChange, label }: RadioGroupItemProps) {
   return (
-    <label className='flex w-fit cursor-pointer gap-2 text-xl font-semibold text-breakerbay-100 transition-colors hover:text-breakerbay-300'>
+    <label className='flex w-full cursor-pointer gap-2 text-xl font-semibold text-breakerbay-100 transition-colors hover:text-breakerbay-300'>
       <input
         checked={checked}
         className='checked:bg-red-900'
