@@ -1,13 +1,12 @@
 import type { Store } from '~/store/types'
-
-import type { CartItem, Field } from '../../types'
+import type { CartItem, Field } from '~/cart/types'
 
 import { useEffect, useState } from 'react'
 
+import { useCart } from '~/cart/context/client'
+
 import { WhatsappIcon } from '@/components/icons/whatsapp'
 import { Button } from '@/components/ui/button'
-
-import { useCart } from '../../context/client'
 
 import Details from './Details'
 import Fields from './Fields'

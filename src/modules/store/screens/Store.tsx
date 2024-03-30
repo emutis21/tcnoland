@@ -1,20 +1,20 @@
 'use client'
 
 import type { Product } from '~/product/types'
+import { type CartItem } from '~/cart/types'
 
 import { useEffect, useMemo, useState } from 'react'
 
 import { useCart } from '~/cart/context/client'
-
-import '@/styles/products.scss'
+import CartItemDrawer from '~/cart/components/CartItemDrawer'
+import ProductCard from '~/product/components/ProductCard'
 
 import { GridLayoutIcon } from '@/components/icons/grid'
 import { ListLayoutIcon } from '@/components/icons/list'
 import { LoaderComponent } from '@/components/ui/loader'
 import { SideCart } from '@/components/ui/sideCart'
-import CartItemDrawer from '@/modules/cart/components/CartItemDrawer'
-import { type CartItem } from '@/modules/cart/types'
-import ProductCard from '@/modules/product/components/ProductCard'
+
+import '@/styles/products.scss'
 
 function StoreScreen({
   query,
@@ -93,8 +93,8 @@ function StoreScreen({
       )}
       {filteredProducts.length !== 0 ? (
         isLoading ? (
-          <div className='absolute h-[100svh] w-full'>
-            <LoaderComponent className=' left-1/2 top-1/4' />
+          <div className='flex w-full items-center justify-center'>
+            <LoaderComponent className='' />
           </div>
         ) : (
           <ul className={layout === 'listLayout' ? 'product__list' : 'product__grid'}>

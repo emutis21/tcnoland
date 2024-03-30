@@ -20,7 +20,8 @@ function Fields({
           <div className='flex flex-col gap-4'>
             {field.type === 'text' && (
               <Input
-                placeholder={field.placeholder}
+                name='adress'
+                placeholder={field.placeholder || 'calle 123 # 7a - 12'}
                 value={checkout.get(field.title) ?? ''}
                 onChange={(e) => {
                   onChange(field.title, e.target.value)

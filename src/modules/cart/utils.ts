@@ -16,17 +16,15 @@ export function getCartMessage(cart: Cart, checkout: Checkout): string {
   const items = Array.from(cart.values())
     .map(
       (item) =>
-        `${item.model}${item.quantity > 1 ? ` (X${item.quantity})` : ''}
-          - ${parseCurrency(getCartItemPrice(item))}
-        `
+        `* *${item.model}${item.quantity > 1 ? ` (X${item.quantity})` : ''}:* ${parseCurrency(getCartItemPrice(item))}`
     )
     .join('\n')
 
   const fields = Array.from(checkout.entries())
-    .map(([key, value]) => `* ${key}: ${value}`)
+    .map(([key, value]) => `*${key}:* ${value}`)
     .join('\n')
 
-  const total = `Total: ${parseCurrency(getCartTotal(cart))}`
+  const total = `*Total:* ${parseCurrency(getCartTotal(cart))}`
 
-  return [items, fields, total].join('\n\n')
+  return `*¡Hola!*\nEstoy interesado en los siguientes productos:\n\n${items}\n\n${fields}\n\n${total}\n\n¡Muchas gracias!`
 }
