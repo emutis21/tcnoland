@@ -1,3 +1,5 @@
+import { revalidateTag } from 'next/cache'
+
 import api from '~/product/api'
 import apiStore from '~/store/api'
 import StoreScreen from '~/store/screens/Store'
@@ -13,6 +15,8 @@ export default async function Home({
 }) {
   const products = await api.list()
   const store = await apiStore.fetch()
+
+  revalidateTag('products')
 
   const query = searchParams?.query ?? ''
   const brand = searchParams?.brand ?? ''
