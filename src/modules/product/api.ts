@@ -89,21 +89,23 @@ function normalize(data: (RawProduct | RawOption | RawUnknown)[]) {
 
 const api = {
   list: async (): Promise<IProduct[]> => {
-    return fetch(process.env.PRODUCTS!, { next: { tags: ['PRODUCTS'] } }).then(async (response) => {
-      const csv: string = await response.text()
+    return fetch(process.env.PRODUCTS!, { cache: 'no-cache', next: { tags: ['products'] } }).then(
+      async (response) => {
+        const csv: string = await response.text()
 
-      return new Promise<IProduct[]>((resolve, reject) => {
-        Papa.parse(csv, {
-          header: true,
-          complete: (results: Papa.ParseResult<Results>) => {
-            const data = results.data as unknown as IProduct[]
+        return new Promise<IProduct[]>((resolve, reject) => {
+          Papa.parse(csv, {
+            header: true,
+            complete: (results: Papa.ParseResult<Results>) => {
+              const data = results.data as unknown as IProduct[]
 
-            return resolve(data)
-          },
-          error: (error: Error) => reject(error.message)
+              return resolve(data)
+            },
+            error: (error: Error) => reject(error.message)
+          })
         })
-      })
-    })
+      }
+    )
   },
   fetch: async (id: IProduct['id']): Promise<IProduct> => {
     const products = await api.list()
