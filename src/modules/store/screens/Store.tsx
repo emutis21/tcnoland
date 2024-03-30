@@ -70,7 +70,7 @@ function StoreScreen({
   }
 
   return (
-    <main className='relative grid h-fit min-h-[calc(100dvh-20rem)] w-full gap-8 [grid-template-columns:_1fr] md:min-h-fit'>
+    <main className='relative grid h-fit min-h-[calc(100vh-20rem)] w-full gap-8 [grid-template-columns:_1fr] md:min-h-fit'>
       {isLoading ? null : (
         <div className='absolute -top-12 flex gap-3 justify-self-end'>
           <button
