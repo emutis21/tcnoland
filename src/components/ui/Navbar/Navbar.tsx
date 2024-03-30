@@ -44,7 +44,7 @@ export function Navbar() {
         <FlyoutLink href='#'>Contacto</FlyoutLink>
 
         <Sidebar isOpen={isOpen} onClose={onClose}>
-          <AsideComponent nav />
+          <AsideComponent />
         </Sidebar>
       </nav>
     </>

@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
 
+import { useProduct } from '~/product/context/client'
+
 import { Arrow } from '@/components/icons/arrow'
-import { useProduct } from '@/modules/product/context/client'
 
 export function PhoneContent() {
   const [state] = useProduct()
