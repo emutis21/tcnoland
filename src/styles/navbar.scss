@@ -24,6 +24,22 @@ nav > [data-type='aside'] {
 }
 
 @media (max-width: 705px) {
+  .closed {
+    padding: 0rem 0.3rem;
+
+    .hamburger {
+      padding: 0;
+    }
+  }
+
+  .open {
+    padding: 0rem;
+
+    .hamburger {
+      padding: 0;
+    }
+  }
+
   [data-type='navbar'] {
     color: var(--color-aside);
 
@@ -31,9 +47,10 @@ nav > [data-type='aside'] {
     border-radius: 0.5rem;
     width: fit-content;
     height: fit-content;
-    margin-left: 0.2rem;
+    margin-left: 0;
+    left: 0.5rem;
     margin-top: 0.5rem;
-    padding: 0rem 0.3rem;
+    transition: all 0.15s ease-in-out;
 
     #flyout-link {
       display: none;
@@ -43,9 +60,6 @@ nav > [data-type='aside'] {
       display: block;
       width: 2rem;
       height: 2rem;
-
-      justify-self: center;
-      align-self: center;
     }
 
     [data-type='aside'] {

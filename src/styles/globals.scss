@@ -23,7 +23,6 @@ body {
 
   @media (max-width: 705px) {
     grid-template-columns: [full-width-start] 10px [breakout-start] 30px [content-start] 1fr [content-end] 30px [breakout-end] 10px [full-width-end];
-    // min-height: 100svh;
   }
 
   &::before {
