@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { Jost } from 'next/font/google'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import '@/styles/globals.scss'
 import CartProvider from '~/cart/context'
@@ -25,7 +26,10 @@ export default function RootLayout({
       <body className={jost.className}>
         <ThemeProvider>
           <ProductProvider>
-            <CartProvider>{children}</CartProvider>
+            <CartProvider>
+              {children}
+              <SpeedInsights />
+            </CartProvider>
             <footer className='sticky grid h-fit place-content-center bg-transparent p-6 pt-12 [grid-column:full-width]'>
               <p className='text-center'>
                 Tcnoland {new Date().getFullYear()}. Hecho con ❤️ por Esteban Mutis
