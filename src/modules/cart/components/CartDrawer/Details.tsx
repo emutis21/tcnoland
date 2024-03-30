@@ -30,7 +30,7 @@ function Details({
           <div className='flex items-center gap-2'>
             <button
               aria-label='Decrementar cantidad'
-              className='text-md transitions-all h-6 w-6 rounded-full p-0.5 text-center text-sky-500 duration-150 hover:text-sky-300 active:scale-90'
+              className='text-md transitions-all h-6 w-6 rounded-full p-0.5 text-center text-sky-200 duration-150 hover:text-breakerbay-300 active:scale-90 dark:text-sky-500 dark:hover:text-sky-300'
               type='button'
               onClick={() => {
                 onChange(id, { ...item, quantity: item.quantity - 1 })
@@ -43,7 +43,7 @@ function Details({
             </p>
             <button
               aria-label='Incrementar cantidad'
-              className='text-md transitions-all h-6 w-6 rounded-full p-0.5 text-center text-sky-500 duration-150 hover:text-sky-300 active:scale-90'
+              className='text-md transitions-all h-6 w-6 rounded-full p-0.5 text-center text-sky-200 duration-150 hover:text-breakerbay-300 active:scale-90 dark:text-sky-500 dark:hover:text-sky-300'
               data-testid='increment'
               type='button'
               onClick={() => {
