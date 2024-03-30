@@ -29,7 +29,7 @@ export function Sidebar({
             top-0
             -z-10
             flex
-            h-[100svh]
+            h-[100dvh]
             w-full
             justify-start
             gap-4

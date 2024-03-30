@@ -32,7 +32,7 @@ export function SideCart({
             top-0
             z-50
             flex
-            h-[100svh]
+            h-[100dvh]
             w-full
             flex-col
             gap-8

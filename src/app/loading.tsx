@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className='flex items-center justify-center h-[100svh]'>
+    <div className='flex h-[100dvh] items-center justify-center'>
       <p>Loading...</p>
     </div>
   )
