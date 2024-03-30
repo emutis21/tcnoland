@@ -25,6 +25,11 @@ export function getCartMessage(cart: Cart, checkout: Checkout): string {
     .join('\n')
 
   const total = `*Total:* ${parseCurrency(getCartTotal(cart))}`
+  const body = `*¡Hola!*\n${
+    items.length > 1
+      ? 'Estoy interesado en los siguientes productos:'
+      : 'Estoy interesado en el siguiente producto:'
+  }\n\n${items}\n\n${fields}\n\n${total}\n\n¡Muchas gracias!`
 
-  return `*¡Hola!*\nEstoy interesado en los siguientes productos:\n\n${items}\n\n${fields}\n\n${total}\n\n¡Muchas gracias!`
+  return body
 }

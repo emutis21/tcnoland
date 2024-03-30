@@ -90,3 +90,9 @@ main {
     padding-left: 0;
   }
 }
+
+@media (min-width: 345px) {
+  .total-button {
+    display: flex;
+  }
+}
