@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { Jost } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/react'
 
 import '@/styles/globals.scss'
 import CartProvider from '~/cart/context'
@@ -29,6 +30,7 @@ export default function RootLayout({
             <CartProvider>
               {children}
               <SpeedInsights />
+              <Analytics />
             </CartProvider>
             <footer className='sticky grid h-fit place-content-center bg-transparent p-6 pt-12 [grid-column:full-width]'>
               <p className='text-center'>
