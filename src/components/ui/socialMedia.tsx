@@ -8,7 +8,7 @@ import { TwitterIcon } from '../icons/twitter'
 export function SocialMedia({ store }: { store: Store }) {
   return (
     <div className='relative'>
-      <div className='absolute -top-7 left-0 flex -translate-y-1/2 transform gap-2'>
+      <div className='absolute -top-[30px] left-0 flex -translate-y-1/2 transform gap-2'>
         {store.instagram ? (
           <a
             aria-label='Instagram'

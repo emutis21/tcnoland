@@ -21,7 +21,9 @@ export default async function Home({
     <>
       <Navbar />
 
-      <h1 className='mb-8 h-fit text-center font-semibold [grid-column:breakout]'>Store</h1>
+      <h1 className='mb-[62px] h-fit text-center font-semibold [grid-column:breakout] md:mb-8'>
+        Store
+      </h1>
 
       <SocialMedia store={store} />
       <div className='[grid-column:breakout-start]'>
