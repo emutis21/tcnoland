@@ -7,6 +7,7 @@ import { useDebouncedCallback } from 'use-debounce'
 import { useProduct } from '~/product/context/client'
 
 import { ThemeSwitcher } from '@/theme/components/ThemeToggle'
+import { usePageVisibility } from '@/hooks/usePageVisibility'
 
 import { SearchIcon } from '../icons/search'
 
@@ -46,6 +47,7 @@ export function AsideComponent() {
   const router = useRouter()
   const [state] = useProduct()
   const [stateCheckbox, dispatch] = useReducer(reducer, initialState)
+  const isVisible = usePageVisibility()
 
   const { products } = state
 
@@ -71,14 +73,16 @@ export function AsideComponent() {
   }, WAIT_BETWEEN_CHANGES)
 
   useEffect(() => {
-    const brands = searchParams.getAll('brand')
-    const newState: Record<string, boolean> = {}
+    if (isVisible) {
+      const brands = searchParams.getAll('brand')
+      const newState: Record<string, boolean> = {}
 
-    brands.forEach((brand) => {
-      newState[brand] = true
-    })
-    dispatch({ type: 'set', newState })
-  }, [searchParams])
+      brands.forEach((brand) => {
+        newState[brand] = true
+      })
+      dispatch({ type: 'set', newState })
+    }
+  }, [isVisible, searchParams])
 
   const handleBrand = (value: string | null, checked: boolean) => {
     const params = new URLSearchParams(searchParams)
