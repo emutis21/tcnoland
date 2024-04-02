@@ -115,10 +115,14 @@ export function AsideComponent() {
   }
 
   const isAllChecked = useMemo(() => {
-    const brands = searchParams.getAll('brand')
+    if (isVisible) {
+      const brands = searchParams.getAll('brand')
 
-    return brands.length === 0
-  }, [searchParams])
+      return brands.length === 0
+    }
+
+    return false
+  }, [searchParams, isVisible])
 
   return (
     <aside className='' data-type='aside' id='filters'>
