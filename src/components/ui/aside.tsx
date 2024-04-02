@@ -7,7 +7,6 @@ import { useDebouncedCallback } from 'use-debounce'
 import { useProduct } from '~/product/context/client'
 
 import { ThemeSwitcher } from '@/theme/components/ThemeToggle'
-import { usePageVisibility } from '@/hooks/usePageVisibility'
 
 import { SearchIcon } from '../icons/search'
 
@@ -47,7 +46,6 @@ export function AsideComponent() {
   const router = useRouter()
   const [state] = useProduct()
   const [stateCheckbox, dispatch] = useReducer(reducer, initialState)
-  const isVisible = usePageVisibility()
 
   const { products } = state
 
@@ -73,16 +71,14 @@ export function AsideComponent() {
   }, WAIT_BETWEEN_CHANGES)
 
   useEffect(() => {
-    if (isVisible) {
-      const brands = searchParams.getAll('brand')
-      const newState: Record<string, boolean> = {}
+    const brands = searchParams.getAll('brand')
+    const newState: Record<string, boolean> = {}
 
-      brands.forEach((brand) => {
-        newState[brand] = true
-      })
-      dispatch({ type: 'set', newState })
-    }
-  }, [isVisible, searchParams])
+    brands.forEach((brand) => {
+      newState[brand] = true
+    })
+    dispatch({ type: 'set', newState })
+  }, [searchParams])
 
   const handleBrand = (value: string | null, checked: boolean) => {
     const params = new URLSearchParams(searchParams)
@@ -115,14 +111,10 @@ export function AsideComponent() {
   }
 
   const isAllChecked = useMemo(() => {
-    if (isVisible) {
-      const brands = searchParams.getAll('brand')
+    const brands = searchParams.getAll('brand')
 
-      return brands.length === 0
-    }
-
-    return false
-  }, [searchParams, isVisible])
+    return brands.length === 0
+  }, [searchParams])
 
   return (
     <aside className='' data-type='aside' id='filters'>
