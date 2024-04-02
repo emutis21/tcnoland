@@ -15,6 +15,7 @@ import { LoaderComponent } from '@/components/ui/loader'
 import { SideCart } from '@/components/ui/sideCart'
 
 import '@/styles/products.scss'
+import { usePageVisibility } from '@/hooks/usePageVisibility'
 
 function StoreScreen({
   query,
@@ -29,28 +30,31 @@ function StoreScreen({
 
   const [layout, setLayout] = useState<'gridLayout' | 'listLayout'>('gridLayout')
   const [isLoading, setIsLoading] = useState(true)
-
   const [openModalId, setOpenModalId] = useState<string | null>(null)
+
+  const isVisible = usePageVisibility()
 
   const filteredProducts = useMemo(() => {
     let result = products
 
-    if (query) {
-      result = result.filter(({ model }) =>
-        [model].some((field) => field.toLowerCase().includes(query.toLowerCase()))
-      )
-    }
+    if (isVisible) {
+      if (query) {
+        result = result.filter(({ model }) =>
+          [model].some((field) => field.toLowerCase().includes(query.toLowerCase()))
+        )
+      }
 
-    if (brand) {
-      if (Array.isArray(brand)) {
-        result = result.filter((product) => brand.includes(product.brand))
-      } else {
-        result = result.filter((product) => product.brand === brand)
+      if (brand) {
+        if (Array.isArray(brand)) {
+          result = result.filter((product) => brand.includes(product.brand))
+        } else {
+          result = result.filter((product) => product.brand === brand)
+        }
       }
     }
 
     return result
-  }, [products, query, brand])
+  }, [products, query, brand, isVisible])
 
   useEffect(() => {
     const savedLayout = localStorage.getItem('layout')
